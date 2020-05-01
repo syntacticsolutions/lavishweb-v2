@@ -1,0 +1,14 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    padding: 100px 20px 0px 20px;
+    align-items: center;
+    max-width: 1100px;
+    text-align: center;
+    margin: auto;
+    
+    p {
+        font-size: 24px;
+    }
+}

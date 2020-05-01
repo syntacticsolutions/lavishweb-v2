@@ -1,0 +1,31 @@
+.lavish-btn {
+    padding: 1rem 2rem;
+    font-weight: 600;
+    font-size: 1.15rem;
+    line-height: 1;
+    border: none;
+    cursor: pointer;
+
+    &.rounded {
+        border-radius: 4px;
+    }
+
+    &.primary {
+        background: $primary;
+        color: $light-text;
+    }
+
+    &.secondary {
+        background: $secondary;
+        color: $minimal;
+    }
+
+    &.minimal {
+        background: $minimal;
+    }
+
+    &.flashy {
+        background: $flashy;
+        color: white;
+    }
+}

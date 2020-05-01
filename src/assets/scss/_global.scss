@@ -1,0 +1,60 @@
+.primary {
+    background: $primary;
+}
+
+.text-primary {
+    color: $primary;
+}
+
+.secondary {
+    background: $secondary;
+}
+
+.text-secondary {
+    color: $secondary;
+}
+
+.flashy {
+    background: $flashy;
+}
+
+.danger {
+    background: $danger
+}
+
+.text-danger {
+    color: $danger;
+}
+
+.big {
+    font-size: 90px;
+}
+.bolder {
+    font-weight: 600;
+}
+
+.overlay {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    background: rgba(0,0,0,0.4);
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-start {
+    justify-content: flex-start;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+
+
+

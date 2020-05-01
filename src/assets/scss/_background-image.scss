@@ -1,0 +1,77 @@
+.lavish-background-image {
+    min-height: 900px;
+    height:100%;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+
+    &.overlay2::before {
+        position: absolute;
+        content: "";
+        background-color: #000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: .7;
+    }
+
+    &.overlay2 {
+        position: relative;
+        z-index: 0;
+    }
+
+    .header {
+        padding: 20px 8% 50px 0px;
+        margin-left: 40%;
+
+        display: flex;
+        h1 {
+            font-size: 64px;
+            color: $minimal;
+        }
+
+        p {
+            color: $minimal;
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 40px;
+        }
+
+        button {
+            width: 150px;
+        }
+
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .lavish-background-image {
+
+        .header {
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .big {
+                font-size: 64px;
+            }
+
+            p {
+                font-size: 24px;
+            }
+            
+            margin-left: 5%;
+            margin-right: 10%;
+            align-items: flex-start;
+            text-align: left;
+        }
+    }
+}
