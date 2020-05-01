@@ -25,6 +25,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install -g yarn
+    - run: npm config set "@fortawesome:registry" https://npm.fontawesome.com/ && \npm config set "//npm.fontawesome.com/:_authToken" 1D7AB336-1250-4064-9A92-713DE7C3CDC7
     - run: yarn install
     - run: yarn run build --if-present
     - run: yarn test
