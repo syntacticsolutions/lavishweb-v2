@@ -1,6 +1,5 @@
 import React, {useRef} from 'react';
 import Button from './components/common/button';
-import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import DualImageLink from './components/common/dual-image-link';
 import Header from './components/common/header'
@@ -64,7 +63,7 @@ const imageRow1Images = [
 ].map(({path, ...rest}) => ({path: require(`./assets/images/${path}`), ...rest}))
 
 function App() {
-  const width = window.innerWidth + 'px'
+  // const width = window.innerWidth + 'px'
   const promoContent = useRef(null)
   return (
     <div className="App">
@@ -76,17 +75,12 @@ function App() {
             <Button type="flashy" rounded>Pricing</Button>
           </ul>
         </nav>
+        <video className="intro-video" autoPlay>
+          <source src={require('./assets/images/Montage.mp4')}
+                  type="video/mp4" />
 
-        <Carousel autoPlay infiniteLoop interval={5000} showThumbs={false} showArrows={false}>
-            {
-              resolvedImages.map((image, index) => (
-                <div className="lavish-carousel-image"key={index}>
-                  <img width={width} src={image} alt={index} />
-                  <div className="overlay" />
-                </div>
-              ))
-            }
-        </Carousel>
+          Sorry, your browser doesn't support embedded videos.
+        </video>
         <DualImageLink images={resolvedImages} texts={imageTexts}/>
         <Header title="Our Features" text="We offer a myriad of mentorship services to get you that dream job you've always wanted. Opportunities abound!" />
         <IconRow />
