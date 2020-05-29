@@ -17,7 +17,7 @@ export default function ImageRow({images}) {
     return (
         <section className="lavish-image-row">
             { images.map((image, ind) => (
-                <div className="image-container" style={{ width: calculateWidth(ind)}}>
+                <div key={ind} className="image-container" style={{ width: calculateWidth(ind)}}>
                     <img src={image.path} alt={image.name} />
                     <div className="hover-overlay" >+</div>
                 </div>

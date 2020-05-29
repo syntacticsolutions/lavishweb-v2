@@ -27,7 +27,7 @@ export default function Pricing() {
         <div className="lavish-pricing container">
             <div className="row" ref={container} >
                 {pricingConfig.map((obj, index) => (
-                    <div className="col-lg-4 col-md-6">
+                    <div key={index} className="col-lg-4 col-md-6">
                         <Animated type="flipInY" delay={index} targetRef={container}  padding={300}>
                             <div className="single-pricing text-center">
                                 <div className="pricing-header">
@@ -36,9 +36,9 @@ export default function Pricing() {
                                 </div>
                                 <div className="pricing-body">
                                     <ul>
-                                        {obj.options.map((option, index) => (
+                                        {obj.options.map((option, idx) => (
 
-                                            <li>{option}</li>
+                                            <li key={idx}>{option}</li>
                                         ))}
                                     </ul>
                                 </div>

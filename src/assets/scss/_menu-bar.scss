@@ -11,7 +11,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1;
+    z-index: 2;
 
     ul {
         display: flex;
@@ -23,9 +23,47 @@
     li {
         list-style-type: none;
         padding: 0px 10px;
+        cursor: pointer;
     }
 }
 
 @media screen and (max-width: 759px) {
-/* TODO */
+    .lavish-menu-bar {
+        ul {
+            background-color: #333;
+            width: 300px;
+            height: 100vh;
+            position: fixed;
+            left: -300px;
+            top: 60px;
+            flex-direction: column;
+            justify-content: flex-start;
+            transition: 300ms ease all;
+            svg {
+                position: fixed;
+                top: 5px;
+                left: 30px;
+                cursor: pointer;
+            }
+
+            button {
+                position: fixed;
+                top: 5px;
+                right: 30px;
+                cursor: pointer;
+            }
+
+            &.active {
+                left: 0px;
+            }
+        }
+
+        li {
+            width: 100%;
+            padding: 20px;
+            &:hover {
+                background-color: #999;
+            }
+        }
+    }
 }

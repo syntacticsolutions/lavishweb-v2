@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import Button from './components/common/button';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import DualImageLink from './components/common/dual-image-link';
@@ -9,6 +9,7 @@ import Animated from './components/common/animated'
 import Pricing from './components/pricing'
 import ImageRow from './components/common/image-row';
 import {WindowScrollProvider} from './context/scroll-context';
+import introVideo from './assets/images/Montage.mp4'
 
 const navLinks = [
   {
@@ -63,24 +64,36 @@ const imageRow1Images = [
 ].map(({path, ...rest}) => ({path: require(`./assets/images/${path}`), ...rest}))
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false)
   // const width = window.innerWidth + 'px'
   const promoContent = useRef(null)
   return (
     <div className="App">
       <WindowScrollProvider>
         <nav className="lavish-menu-bar">
-          <ul>
-            <svg className="lavish-logo" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 290 290"><title>Untitled-1</title><path d="M710,143a137,137,0,1,1-96.87,40.13A136.08,136.08,0,0,1,710,143m0-8A145,145,0,1,0,855,280,145,145,0,0,0,710,135Z" transform="translate(-565 -135)"/><polygon points="93.5 247 63.5 247 22.5 75 52.5 75 93.5 247"/><rect x="73" y="217" width="91" height="30"/><path d="M659.25,341.46l-5.12-21.73q21.2-32.79,42.4-65.56l35.29.42-55.89,86.87Z" transform="translate(-565 -135)"/><path d="M792.17,367.55l-25.39,14.36a.43.43,0,0,1-.57-.16L695.94,257.51a.42.42,0,0,1,.16-.57L708,256l24-1Z" transform="translate(-565 -135)"/><polygon points="201 247 231.21 247 272.5 75 242.29 75 201 247"/><path d="M709,249" transform="translate(-565 -135)"/><path d="M911,361" transform="translate(-565 -135)"/><path d="M732,377" transform="translate(-565 -135)"/><path d="M690,340" transform="translate(-565 -135)"/><path d="M707,341" transform="translate(-565 -135)"/><path d="M655.42,329.42" transform="translate(-565 -135)"/></svg>
-            {navLinks.map(({title, path}, ind) => (<li key={ind}>{title}</li>))}
+          <ul className={menuOpen && 'active'}>
+            <svg
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="lavish-logo"
+              id="Layer_1"
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              width="50px"
+              height="50px"
+              viewBox="0 0 290 290"><title>Untitled-1</title><path d="M710,143a137,137,0,1,1-96.87,40.13A136.08,136.08,0,0,1,710,143m0-8A145,145,0,1,0,855,280,145,145,0,0,0,710,135Z" transform="translate(-565 -135)"/><polygon points="93.5 247 63.5 247 22.5 75 52.5 75 93.5 247"/><rect x="73" y="217" width="91" height="30"/><path d="M659.25,341.46l-5.12-21.73q21.2-32.79,42.4-65.56l35.29.42-55.89,86.87Z" transform="translate(-565 -135)"/><path d="M792.17,367.55l-25.39,14.36a.43.43,0,0,1-.57-.16L695.94,257.51a.42.42,0,0,1,.16-.57L708,256l24-1Z" transform="translate(-565 -135)"/><polygon points="201 247 231.21 247 272.5 75 242.29 75 201 247"/><path d="M709,249" transform="translate(-565 -135)"/><path d="M911,361" transform="translate(-565 -135)"/><path d="M732,377" transform="translate(-565 -135)"/><path d="M690,340" transform="translate(-565 -135)"/><path d="M707,341" transform="translate(-565 -135)"/><path d="M655.42,329.42" transform="translate(-565 -135)"/></svg>
+            {navLinks.map(({title, path}, ind) => (
+              <li key={ind}>{title}</li>
+            ))}
             <Button type="flashy" rounded>Pricing</Button>
           </ul>
         </nav>
-        <video className="intro-video" autoPlay>
-          <source src={require('./assets/images/Montage.mp4')}
-                  type="video/mp4" />
+        <section className="video-container">
+          <video className="intro-video" autoPlay muted>
+            <source src={introVideo} type="video/mp4" />
 
-          Sorry, your browser doesn't support embedded videos.
-        </video>
+            Sorry, your browser doesn't support embedded videos.
+          </video>
+        </section>
         <DualImageLink images={resolvedImages} texts={imageTexts}/>
         <Header title="Our Features" text="We offer a myriad of mentorship services to get you that dream job you've always wanted. Opportunities abound!" />
         <IconRow />
@@ -92,7 +105,7 @@ function App() {
                 text="During the summer we are offering a discount for our intensive full stack project building program."
                 btnText="Enroll Now!"
               >
-                <span class="text-danger big bolder">50% Off</span>
+                <span className="text-danger big bolder">50% Off</span>
               </Header>
             </Animated>
           </BackgroundImage>
