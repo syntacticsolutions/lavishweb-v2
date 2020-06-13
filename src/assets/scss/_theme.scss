@@ -1,0 +1,18 @@
+.App {
+    &.light {
+        .lavish-menu-bar {
+            background: white;
+            color: #555;
+        }
+        .video-container {
+            background-color: white;
+        }
+
+        .overlay2::before {
+            background-color: rgba(255, 255, 255, 0.788);
+        }
+        .overlay2 {
+            color: #333;
+        }
+    }
+}

@@ -65,13 +65,15 @@ const imageRow1Images = [
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [lightMode, setLightMode] = useState(false)
   // const width = window.innerWidth + 'px'
   const promoContent = useRef(null)
   return (
-    <div className="App">
+    <div className={`App ${lightMode && 'light'}`}>
       <WindowScrollProvider>
         <nav className="lavish-menu-bar">
           <ul className={menuOpen && 'active'}>
+            <Button onClick={() => setLightMode(!lightMode)}>{lightMode ? 'Dark Mode' : 'Light Mode'}</Button>
             <svg
               onClick={() => setMenuOpen(!menuOpen)}
               className="lavish-logo"
