@@ -6,7 +6,7 @@ export default function MenuBar({navLinks, lightMode, onSetLightMode}) {
     const [menuOpen, setMenuOpen] = useState(false)
     return (
         <nav className="lavish-menu-bar">
-            <ul className={menuOpen && 'active'}>
+            <ul className={menuOpen ? 'active' : ''}>
                 <Button onClick={() => onSetLightMode(!lightMode)}>{lightMode ? 'Dark Mode' : 'Light Mode'}</Button>
                 <svg
                     onClick={() => setMenuOpen(!menuOpen)}

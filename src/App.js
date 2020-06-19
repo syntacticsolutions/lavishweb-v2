@@ -33,7 +33,7 @@ function App() {
   const [lightMode, setLightMode] = useState(false)
 
   return (
-    <div className={`App ${lightMode && 'light'}`}>
+    <div className={`App ${lightMode ? 'light' : 'dark'}`}>
       <WindowScrollProvider>
         <Router>
           <MenuBar
@@ -52,17 +52,17 @@ function App() {
 
 
 const getComponent = (link, index) => {
-  let component
+  let Component
   try {
-    component = require(`./pages${link.path}`).default
+    Component = require(`./pages${link.path}`).default
   } catch(err) {
-    component = () => <div style={{color:'white'}}>Under Construction</div>
+    Component = () => <div style={{color:'white'}}>Under Construction</div>
   }
   return <Route
           key={index}
           path={link.path}
         >
-          <component/>
+          <Component/>
         </Route>
 }
 
