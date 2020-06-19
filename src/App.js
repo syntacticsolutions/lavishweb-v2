@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import MenuBar from './components/menu-bar'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import MenuBar from './components/menu-bar';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import {WindowScrollProvider} from './context/scroll-context';
 

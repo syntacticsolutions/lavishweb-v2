@@ -1,13 +1,14 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import Button from '../common/button';
+import Toggle from '../common/toggle';
 
 export default function MenuBar({navLinks, lightMode, onSetLightMode}) {
     const [menuOpen, setMenuOpen] = useState(false)
     return (
         <nav className="lavish-menu-bar">
             <ul className={menuOpen && 'active'}>
-                <Button onClick={() => onSetLightMode(!lightMode)}>{lightMode ? 'Dark Mode' : 'Light Mode'}</Button>
+                <Toggle onClick={() => onSetLightMode(!lightMode)}>{lightMode ? 'Dark Mode' : 'Light Mode'}</Toggle>
                 <svg
                     onClick={() => setMenuOpen(!menuOpen)}
                     className="lavish-logo"
