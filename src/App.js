@@ -6,6 +6,7 @@ import Header from './components/common/header'
 import IconRow from './components/common/icon-row'
 import BackgroundImage from './components/common/background-image'
 import Animated from './components/common/animated'
+import Toggle from './components/common/toggle';
 import Pricing from './components/pricing'
 import ImageRow from './components/common/image-row';
 import {WindowScrollProvider} from './context/scroll-context';
@@ -73,7 +74,7 @@ function App() {
       <WindowScrollProvider>
         <nav className="lavish-menu-bar">
           <ul className={menuOpen && 'active'}>
-            <Button onClick={() => setLightMode(!lightMode)}>{lightMode ? 'Dark Mode' : 'Light Mode'}</Button>
+            <Toggle onClick={() => setLightMode(!lightMode)}>{lightMode ? 'Dark Mode' : 'Light Mode'}</Toggle>
             <svg
               onClick={() => setMenuOpen(!menuOpen)}
               className="lavish-logo"

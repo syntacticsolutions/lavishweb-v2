@@ -1,7 +1,7 @@
 .App {
     &.light {
         .lavish-menu-bar {
-            background: white;
+            background-color: white;
             color: #555;
         }
         .video-container {
@@ -13,6 +13,43 @@
         }
         .overlay2 {
             color: #333;
+        }
+        .header{
+            background-color: rgb(255, 255, 255);
+            color: #555;
+            transition: 500ms ease all;
+        }
+        .lavish-icon-row{
+            background-color: white;
+            color: #555;
+            transition: 500ms ease all;
+        }
+        .single-feature{
+            color: #555;
+        }
+        .lavish-animate{
+            color: #555;
+        }
+        .lavish-background-image .header h1, p {
+            color: #555 !important;
+        }       
+        .lavish-pricing{
+            max-width: 1500px;
+            transition: 500ms ease all;
+            background-color: white;
+        }
+        .lavish-pricing .single-pricing {
+            background-color: white;
+        }
+        .lavish-pricing .pricing-header h3 {
+            color: #555;    
+        }
+        .lavish-pricing .pricing-body ul li {
+            color: #555;    
+        }
+        .lavish-menu-bar ul.active {
+            background-color: white;
+            color: #555;  
         }
     }
 }
