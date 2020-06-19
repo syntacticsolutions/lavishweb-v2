@@ -74,7 +74,7 @@ function App() {
       <WindowScrollProvider>
         <nav className="lavish-menu-bar">
           <ul className={menuOpen && 'active'}>
-            <Toggle onClick={() => setLightMode(!lightMode)}>{lightMode ? 'Dark Mode' : 'Light Mode'}</Toggle>
+            <Toggle checked={lightMode} onClick={() => setLightMode(!lightMode)}>{lightMode ? 'Dark Mode' : 'Light Mode'}</Toggle>
             <svg
               onClick={() => setMenuOpen(!menuOpen)}
               className="lavish-logo"
