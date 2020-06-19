@@ -28,5 +28,5 @@ function useWindowScrollY() {
     return context
 }
 
-export {WindowScrollProvider,useWindowScrollY}
+export {WindowScrollProvider, useWindowScrollY, WindowScrollContext}
 

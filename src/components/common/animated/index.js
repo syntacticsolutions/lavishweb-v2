@@ -7,15 +7,13 @@ export default function Animated ({type, children, targetRef, delay, padding = 0
     const scrollY = useWindowScrollY()
     const [timer, setTimer] = useState()
 
-
     useEffect(function(){
 
         if (!timer && scrollY) {
             setTimer(setTimeout(() => {
-                const target = targetRef.current
-                if (!transitioned &&
-                    scrollY >= (target.offsetTop + target.offsetHeight / 2) - padding
-                    ) {
+                const {offsetTop, offsetHeight} = targetRef.current
+                const targetDistanceFromTop = offsetTop + offsetHeight / 2 - padding
+                if (!transitioned && scrollY >= targetDistanceFromTop) {
                     setTransitioned(true)
                 }
                 setTimer(undefined)
@@ -24,5 +22,5 @@ export default function Animated ({type, children, targetRef, delay, padding = 0
 
     }, [scrollY]) // eslint-disable-line
 
-    return (<div className={`lavish-animate ${transitioned && `animated ${type}`}`}>{children}</div>)
+    return (<div className={`lavish-animate ${transitioned ? `animated ${type}`: ''}`}>{children}</div>)
 }
