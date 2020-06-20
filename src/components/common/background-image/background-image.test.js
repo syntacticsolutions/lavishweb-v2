@@ -13,9 +13,9 @@ test('Should render children', () => {
 })
 
 test('Should render background image from props', () => {
-    const {container} = render(<BackgroundImage image={promoImage}>children</BackgroundImage>)
+    const {container: {innerHTML}} = render(<BackgroundImage image={promoImage}>children</BackgroundImage>)
 
-    const hasImageBackgroundStyle = container.innerHTML.includes('style="background-image: url(cyber-monday-promotion-poster-X2CDZUJ.jpg);')
+    const hasImageBackgroundStyle = innerHTML.includes('style="background-image: url(cyber-monday-promotion-poster-X2CDZUJ.jpg);')
     
-    expect(hasImageBackgroundStyle).toBe(true)
+    expect(hasImageBackgroundStyle).toBeTruthy()
 })
