@@ -28,10 +28,11 @@
     }
 
     .header {
-        padding: 20px 8% 50px 0px;
-        margin-left: 40%;
-
+        padding: 20px 20px 50px 20px;
+        margin-left: 50%;
+        margin-right: 50px;
         display: flex;
+        border-radius: 3px;
         h1 {
             font-size: 64px;
             color: $minimal;
