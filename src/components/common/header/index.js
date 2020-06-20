@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from './button'
+import Button from '../button'
 
 export default function Header ({title, text, align, children, onClick, btnText}) {
     return (

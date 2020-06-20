@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import Animated from './animated'
+import Animated from '../animated'
 
 const iconRowSections = [
     {

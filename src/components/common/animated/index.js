@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
-import {useWindowScrollY} from '../../context/scroll-context'
+import {useWindowScrollY} from '../../../context/scroll-context'
 
 export default function Animated ({type, children, targetRef, delay, padding = 0}) {
     const [transitioned, setTransitioned] = useState(false)
