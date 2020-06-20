@@ -1,55 +1,62 @@
+body{
+
 .App {
+    
     &.light {
+        background-color: $lightmode;
         .lavish-menu-bar {
-            background: white;
-            color: #555;
+            background: $lightmode;
+            color: $text;
         }
         .video-container {
-            background-color: white;
+            background-color: $lightmode;
         }
 
         .overlay2::before {
-            background-color: rgba(255, 255, 255, 0.788);
+            background-color: $lightmode;
         }
         .overlay2 {
-            color: #333;
+            color: $text;
         }
         .header{
-            background-color: rgb(255, 255, 255);
-            color: #555;
+            background-color: $lightmode;
+            color: $text;
             transition: 500ms ease all;
         }
         .lavish-icon-row{
-            background-color: white;
-            color: #555;
+            background-color: $lightmode;
+            color: $text;
             transition: 500ms ease all;
         }
         .single-feature{
-            color: #555;
+            color: $text;
         }
         .lavish-animate{
-            color: #555;
+            color: $text;
         }
         .lavish-background-image .header h1, p {
-            color: #555 !important;
+            color: $text;
         }       
         .lavish-pricing{
-            max-width: 1500px;
             transition: 500ms ease all;
-            background-color: white;
+            background-color: $lightmode;
+            
         }
         .lavish-pricing .single-pricing {
-            background-color: white;
+            background-color: $lightmode;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9
         }
         .lavish-pricing .pricing-header h3 {
-            color: #555;    
+            color: $text;    
         }
         .lavish-pricing .pricing-body ul li {
-            color: #555;    
+            color: $text;    
         }
         .lavish-menu-bar ul.active {
-            background-color: white;
-            color: #555;  
+            background-color: $lightmode;
+            color: $text;  
+            }
         }
     }
 }
