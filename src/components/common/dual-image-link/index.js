@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
-import Button from './button'
-import Animated from './animated'
+import Button from '../button'
+import Animated from '../animated'
 
 export default function DualImageLink ({images, texts}) {
     const container = useRef(null)
