@@ -1,9 +1,7 @@
-body{
-
-.App {
-    
-    &.light {
+body {
+    .App.light {
         background-color: $lightmode;
+
         .lavish-menu-bar {
             background: $lightmode;
             color: $text;
@@ -18,26 +16,26 @@ body{
         .overlay2 {
             color: $text;
         }
-        .header{
+        .header {
             background-color: $lightmode;
             color: $text;
             transition: 500ms ease all;
         }
-        .lavish-icon-row{
+        .lavish-icon-row {
             background-color: $lightmode;
             color: $text;
             transition: 500ms ease all;
         }
-        .single-feature{
+        .single-feature {
             color: $text;
         }
-        .lavish-animate{
+        .lavish-animate {
             color: $text;
         }
         .lavish-background-image .header h1, p {
             color: $text;
         }       
-        .lavish-pricing{
+        .lavish-pricing {
             transition: 500ms ease all;
             background-color: $lightmode;
             
@@ -45,7 +43,7 @@ body{
         .lavish-pricing .single-pricing {
             background-color: $lightmode;
             border: 1px solid #ccc;
-            background-color: #f9f9f9
+            background-color: #f9f9f9;
         }
         .lavish-pricing .pricing-header h3 {
             color: $text;    
@@ -55,13 +53,7 @@ body{
         }
         .lavish-menu-bar ul.active {
             background-color: $lightmode;
-            color: $text;  
-            }
-        }
-        .header{
-            background-color: rgb(255, 255, 255);
-            color: #555;
-            transition: 500ms ease all;
+            color: $text;
         }
         .lavish-icon-row{
             background-color: white;
@@ -97,3 +89,4 @@ body{
         }
     }
 }
+    
