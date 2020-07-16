@@ -5,6 +5,7 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import './App.css'
 import 'animate.css'
+import 'antd/dist/antd.css';
 import './assets/scss/base.scss'
 import '@fortawesome/fontawesome-pro/css/all.css'
 import 'bootstrap/dist/css/bootstrap.min.css'

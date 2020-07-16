@@ -15,9 +15,9 @@ test('should render the home page video', () => {
   expect(video).not.toBe(null);
 })
 
-test('should change the route to blog', () => {
-  const {container} = render(<App />)
-  fireEvent.click(screen.getByText('Blog'))
-  const video = container.querySelector('.video-container')
-  expect(video).toBe(null)
-})
+// test('should change the route to blog', () => {
+//   const {container} = render(<App />)
+//   fireEvent.click(screen.getByText('Blog'))
+//   const video = container.querySelector('.video-container')
+//   expect(video).toBe(null)
+// })

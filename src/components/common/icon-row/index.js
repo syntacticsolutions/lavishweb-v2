@@ -4,13 +4,13 @@ import Animated from '../animated'
 const iconRowSections = [
     {
         icon: 'comments-alt-dollar',
-        title: 'Professonal Feedback',
+        title: 'Professional Feedback',
         text: 'Get professional advice on how to improve your portfolio and add challenging accomplishments.'
     },
     {
         icon: 'chalkboard-teacher',
         title: 'Weekly Mentoring',
-        text: 'Get 1 on 1 advice and code style walkthroughs that will improve your architecture skills.',
+        text: 'Get 1 on 1 advice and code style walk-throughs that will improve your architecture skills.',
     },
     {
         icon: 'space-shuttle',
