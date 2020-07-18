@@ -2,6 +2,11 @@ body {
     .App.light {
         background-color: $lightmode;
 
+        .home .row h1 {
+            color: #333;
+        }
+          
+
         .lavish-menu-bar {
             background: $lightmode;
             color: $text;
@@ -87,6 +92,36 @@ body {
             background-color: white;
             color: #555;  
         }
+
+
+        .ant-pagination-simple,
+        .anticon-left,
+        .anticon-right {
+            color: #333;
+        }
+        .ant-pagination-simple-pager input {
+            background-color: white;
+        }
+
+        .post-container {
+            h2 {
+                color: #333;
+            }
+    
+            .description-text {
+                color: #333;
+            }
+        }
+
+
+        .lavish-menu-bar {
+            box-shadow: 2px 2px 7px #ccc;
+        }
+
+        .dual-link-image h2 {
+            color: #333;
+        }
+    
     }
 }
     

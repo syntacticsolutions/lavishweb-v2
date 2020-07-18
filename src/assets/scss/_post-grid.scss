@@ -3,6 +3,14 @@
         text-align: center;
         padding-bottom: 50px;
     }
+    .ant-pagination-simple,
+    .anticon-left,
+    .anticon-right {
+        color: white;
+    }
+    .ant-pagination-simple-pager input {
+        background-color: #333;
+    }
 }
 
 .post-grid {
@@ -11,6 +19,17 @@
     grid-gap: 30px;
     grid-auto-rows: 1fr;
     padding-bottom: 50px;
+
+
+    .post-container {
+        h2 {
+            color: #ccc;
+        }
+
+        .description-text {
+            color: #ccc;
+        }
+    }
     
     figure {
         height: 100%;
@@ -44,7 +63,11 @@
         .description-text {
             font-size: 18px;
             font-weight: 400px;
-            color: #555;
+        }
+
+        a {
+            color: #007bff;
+            font-weight: 600;
         }
     }
 }

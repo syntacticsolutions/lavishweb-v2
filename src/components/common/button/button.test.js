@@ -3,8 +3,6 @@ import {render, screen, fireEvent } from '@testing-library/react';
 import Button from './'
 const mockFn = jest.fn()
 
-const promoImage = require('../../../assets/images/cyber-monday-promotion-poster-X2CDZUJ.jpg')
-
 test('Should render button text', () => {
     const {container} = render(<Button >Click Me</Button>)
 

@@ -12,6 +12,17 @@
     justify-content: center;
     align-items: center;
     z-index: 2;
+    box-shadow: 2px 2px 7px #333;
+
+    .menu-title {
+        display: flex;
+        align-items: flex-end;
+        span {
+            margin-left: 20px;
+            margin-bottom: 5px;
+            font-size: 25px;
+        }
+    }
 
     ul {
         display: flex;

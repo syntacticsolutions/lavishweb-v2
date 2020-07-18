@@ -52,19 +52,7 @@ export default function Home() {
             <DualImageLink images={resolvedImages} texts={imageTexts} />
             <Header title="Our Features" text="We offer a myriad of mentorship services to get you that dream job you've always wanted. Opportunities abound!" />
             <IconRow />
-            <section ref={promoContent}>
-                <BackgroundImage image={promoImage}>
-                    <Animated type="fadeInRight" targetRef={promoContent}>
-                        <Header
-                            title="Awesome savings for this summer!"
-                            text="During the summer we are offering a discount for our intensive full stack project building program."
-                            btnText="Enroll Now!"
-                        >
-                            <span className="text-danger big bolder">50% Off</span>
-                        </Header>
-                    </Animated>
-                </BackgroundImage>
-            </section>
+
             <Header title="Our Pricing" text="Some need advice while others need more in-depth training. Our services are geared towards providing the best solution for you!" />
             <Pricing />
             <ImageRow images={imageRow1Images} />
