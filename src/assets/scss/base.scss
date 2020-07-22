@@ -3,9 +3,6 @@
 @import './global';
 @import './theme';
 
-
-/* reusable components */
-
 @import './button';
 @import './menu-bar';
 @import './carousel';
@@ -24,6 +21,7 @@
 @import './masonry-posts';
 @import './tag-row';
 @import './navigation';
+@import './post-editor';
 
 
 h1 {

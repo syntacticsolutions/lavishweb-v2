@@ -2,7 +2,9 @@ import React, {useState} from 'react';
 import MenuBar from './components/menu-bar'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
+
 import {WindowScrollProvider} from './context/scroll-context';
+import PostCreator from './pages/post-creator'
 
 const navLinks = [
   {
@@ -27,6 +29,7 @@ const navLinks = [
   }
 ]
 
+
 const home = navLinks.shift()
 
 function App() {
@@ -43,6 +46,8 @@ function App() {
           <Switch>
             <Route exact path="/" component={() => React.createElement(require('./pages/home').default)} />
             {navLinks.map(getComponent)}
+            <Route path="/edit-post" component={PostCreator}>
+            </Route>
           </Switch>
         </Router>
       </WindowScrollProvider>

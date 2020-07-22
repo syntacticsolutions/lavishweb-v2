@@ -9,6 +9,7 @@ import 'antd/dist/antd.css';
 import './assets/scss/base.scss'
 import '@fortawesome/fontawesome-pro/css/all.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'quill/dist/quill.snow.css'
 
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
