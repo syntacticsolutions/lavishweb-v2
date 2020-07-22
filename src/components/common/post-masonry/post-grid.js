@@ -27,32 +27,40 @@ export default function PostGrid ({posts}) {
     return (
         <section className="grid-pagination-container">
             <section className="post-grid container">
-                {paginatedPosts.map((post, index) => (
-                    <div className="post-container">
-                        <figure>
-                            <Link to={post.link}>
-                                <img src={require(`../../../assets/images/${post.image}`)} alt={post.image}/>
-                            </Link>
-                        </figure>
-                        <TagRow tags={post.categories} />
-                        <h2>{post.title}</h2>
-                        <p className="author-text">
-                            <span>
-                                By:
-                                <Link to={`/authors/${post.author}`} >
-                                    {post.author}
+                {paginatedPosts.map((post, index) => {
+                    let image
+                    try {
+                        image = require(`../../../assets/images/${post.image}`)
+                    } catch (err) {
+                        return 'Image not found'
+                    }
+
+                    return (
+                        <div className="post-container">
+                            <figure>
+                                <Link to={post.link}>
+                                    <img src={require(`../../../assets/images/${post.image}`)} alt={post.image}/>
                                 </Link>
-                            </span>
-                            <span>
-                                - {post.date}
-                            </span>
-                        </p>
-                        <p className="description-text">
-                            {post.description}
-                        </p>
-                        <Link to={post.link}>Read More...</Link>
-                    </div>
-                ))}
+                            </figure>
+                            <TagRow tags={post.categories} />
+                            <h2>{post.title}</h2>
+                            <p className="author-text">
+                                <span>
+                                    By:
+                                    <Link to={`/authors/${post.author}`} >
+                                        {post.author}
+                                    </Link>
+                                </span>
+                                <span>
+                                    - {post.date}
+                                </span>
+                            </p>
+                            <p className="description-text">
+                                {post.description}
+                            </p>
+                            <Link to={post.link}>Read More...</Link>
+                        </div>
+                    )})}
             </section>
             <Pagination
                 simple

@@ -10,9 +10,26 @@ import './assets/scss/base.scss'
 import '@fortawesome/fontawesome-pro/css/all.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
+import { ApolloProvider } from '@apollo/react-hooks';
+
+const cache = new InMemoryCache();
+const link = new HttpLink({
+  uri: 'https://backend.lavishweb.com/graphql'
+});
+
+const client = new ApolloClient({
+  cache,
+  link
+});
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
