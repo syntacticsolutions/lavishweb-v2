@@ -8,7 +8,7 @@ export default function MenuBar({navLinks, lightMode, onSetLightMode}) {
     return (
         <nav className="lavish-menu-bar">
             <ul className={menuOpen ? 'active' : ''}>
-                <div class="menu-title">
+                <div className="menu-title">
                     <svg
                         onClick={() => setMenuOpen(!menuOpen)}
                         className="lavish-logo"

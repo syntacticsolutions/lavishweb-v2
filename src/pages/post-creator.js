@@ -66,13 +66,11 @@ export default function PostCreator ({match, history}) {
         setEditorEl(new Quill(quillEditor.current, options))
     }, [])
 
-
-
     return (
         <section className="post-editor-container">
             <h3 className="align-start">{id ? 'Edit ': 'Create a '} Post</h3>
             <div className="editor-inputs">
-                <div class="image-selector-input">
+                <div className="image-selector-input">
                     <div>
                         <h6>Background image/video:</h6>
                         {
