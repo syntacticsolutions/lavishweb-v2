@@ -1,13 +1,16 @@
 import React, {useRef, useEffect, useState, useCallback} from 'react'
 import {useMutation, useQuery} from '@apollo/react-hooks'
-import {Input} from 'antd'
+import {Input, Select} from 'antd'
+
 import Button from '../components/common/button'
 import ImageSelectorModal from '../components/common/image-selector-modal'
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 
 import featured from '../assets/mocks/featured'
-import {SAVE_POST_MUTATION, PUBLISH_POST_MUTATION} from '../queries/posts'
+import {SAVE_POST_MUTATION, PUBLISH_POST_MUTATION, GET_CATEGORIES_QUERY} from '../queries/posts'
+
+const { Option } = Select;
 
 const images = featured.map(({image}) => image)
 
@@ -36,6 +39,7 @@ export default function PostCreator ({match, history}) {
 
     const [savePost, {data: savedId}] = useMutation(SAVE_POST_MUTATION)
     const [publishPost, {data: publishedId}] = useMutation(PUBLISH_POST_MUTATION)
+    const {data: catData, error, loading} = useQuery(GET_CATEGORIES_QUERY)
 
     const save = useCallback(() => {
         savePost({variables: { id, data }})
@@ -139,6 +143,29 @@ export default function PostCreator ({match, history}) {
                         { withLabel(<Input placeholder="Keyword 1" onChange={setModel('keyword1')} />, 'Keyword 1')}
                         { withLabel(<Input placeholder="Keyword 1" onChange={setModel('keyword2')} />, 'Keyword 1')}
                     </div>
+                    {
+                        catData?.categories && withLabel(
+                            <Select
+                                mode="multiple"
+                                style={{ width: '100%' }}
+                                placeholder="Select categories"
+                                onChange={(val) => console.log(val)}
+                                optionLabelProp="label"
+                            >
+                                {
+                                    catData.categories.map(({label, id}) => (
+
+                                        <Option value={id} label={label}>
+                                            <div className="demo-option-label-item">
+                                                {label}
+                                            </div>
+                                        </Option>
+                                    ))
+                                }
+                            </Select>,
+                            'Categories'
+                        )
+                    }
                     <Button type="secondary" onClick={() => setImageModalOpen(true)}>Change Thumbnail</Button>
                     <p className="text-primary mt-2">{data.image}</p>                
                     {imageModalOpen && (

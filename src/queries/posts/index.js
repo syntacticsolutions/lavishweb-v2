@@ -11,3 +11,12 @@ export const PUBLISH_POST_MUTATION = gql`
         publishPost(id: $id, data: $data)
     }
 `
+
+export const GET_CATEGORIES_QUERY = gql`
+    query GetCategories {
+        categories: getCategories {
+            label
+            id
+        }
+    }
+`
