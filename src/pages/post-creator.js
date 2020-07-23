@@ -31,7 +31,7 @@ export default function PostCreator ({match, history}) {
         keyword2: '',
         bg_src: '',
         bg_type: 1,
-        categories: []
+        categories: [] // TODO add input for this
     })
 
     const [savePost, {data: savedId}] = useMutation(SAVE_POST_MUTATION)
@@ -39,7 +39,10 @@ export default function PostCreator ({match, history}) {
 
     const save = useCallback(() => {
         savePost({variables: { id, data }})
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            // TODO add toaster messages
+        })
     }, [])
 
     const publish = useCallback(async () => {
@@ -63,30 +66,63 @@ export default function PostCreator ({match, history}) {
         setEditorEl(new Quill(quillEditor.current, options))
     }, [])
 
+
+
     return (
         <section className="post-editor-container">
             <h3 className="align-start">{id ? 'Edit ': 'Create a '} Post</h3>
             <div className="editor-inputs">
                 <div class="image-selector-input">
                     <div>
-                        <h6>Thumbnail image:</h6>
-                        <figure onClick={() => setImageModalOpen(true)}>
-                            <img src={data.image ? require(`../assets/images/${data.image}`) : `https://cdn5.vectorstock.com/i/thumb-large/99/94/default-avatar-placeholder-profile-icon-male-vector-23889994.jpg`} />
-                            <div className="figure-overlay" >
-                                <span>Change Thumbnail <i className={`fal fa-camera`} /></span>
-                            </div>
-                        </figure>
+                        <h6>Background image/video:</h6>
+                        {
+                            data.bg_type === '2' &&
+                                <section className="iframe-container" onClick={() => setBackgroundImageModalOpen(true)} >
+                                    {data.bg_src &&
+                                        <iframe
+                                            width="100%"
+                                            height="300px"
+                                            src={data.bg_src}
+                                            frameborder="0"
+                                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen
+                                        />
+                                    }
+                                    <div className="figure-overlay" >
+                                        <span>Change Background <i className={`fal fa-camera`} /> / <i className={`fal fa-video`} />
+                                        </span>
+                                    </div>
+                                </section>
+                            ||
+                            (
+                                <figure onClick={() => setBackgroundImageModalOpen(true)}>
+                                    <img src={
+                                        data.bg_src
+                                        ? require(`../assets/images/${data.bg_src}`)
+                                        : `https://cdn5.vectorstock.com/i/thumb-large/99/94/default-avatar-placeholder-profile-icon-male-vector-23889994.jpg`}
+                                    />
+                                    <div className="figure-overlay" >
+                                        <span>Change Background <i className={`fal fa-camera`} /> / <i className={`fal fa-video`} />
+                                        </span>
+                                    </div>
+                                </figure>
+                            )
+                        }
                     </div>
-                    
-                    {imageModalOpen && (
+                    {backgroundImageModalOpen && (
                         <ImageSelectorModal
                             images={images}
-                            onSelectImage={(image) => {
-                                setData({ ...data, image })
-                                setImageModalOpen(false)
+                            showTabs={true}
+                            onSelectImage={(bg_src) => {
+                                setData({ ...data, bg_src })
+                                setBackgroundImageModalOpen(false)
+                            }}
+                            onSelectTab={(bg_type) => {
+                                console.log({bg_type})
+                                setData({...data, bg_type})
                             }}
                         />
-                    )}
+                    )} 
                 </div>
                 <div>
                     { withLabel(
@@ -105,18 +141,14 @@ export default function PostCreator ({match, history}) {
                         { withLabel(<Input placeholder="Keyword 1" onChange={setModel('keyword1')} />, 'Keyword 1')}
                         { withLabel(<Input placeholder="Keyword 1" onChange={setModel('keyword2')} />, 'Keyword 1')}
                     </div>
-                    <Button type="secondary" onClick={() => setBackgroundImageModalOpen(true)}>Change Background Image</Button>
-                    <p className="text-primary mt-2">{data.bg_src}</p>
-                    {backgroundImageModalOpen && (
+                    <Button type="secondary" onClick={() => setImageModalOpen(true)}>Change Thumbnail</Button>
+                    <p className="text-primary mt-2">{data.image}</p>                
+                    {imageModalOpen && (
                         <ImageSelectorModal
                             images={images}
-                            showTabs={true}
-                            onSelectImage={(bg_src) => {
-                                setData({ ...data, bg_src })
-                                setBackgroundImageModalOpen(false)
-                            }}
-                            onSelecTab={(bg_type) => {
-                                setData({...data, bg_type})
+                            onSelectImage={(image) => {
+                                setData({ ...data, image })
+                                setImageModalOpen(false)
                             }}
                         />
                     )}

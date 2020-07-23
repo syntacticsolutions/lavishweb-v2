@@ -9,14 +9,12 @@ export default function ImageSelectorModal({ images, onSelectImage, onSelectTab,
     const [link, setLink] = useState('')
     return (
         <div className="image-selector-modal">
-
-
             {tab === '1' && (
                 <div className="image-selector-header">
                     <h5>Select an Image</h5>
                     <Button
                         type="flashy"
-                        roundeds
+                        rounded
                     >
                         <span>
                             Upload Image <i className={`fal fa-camera`} />
@@ -37,12 +35,25 @@ export default function ImageSelectorModal({ images, onSelectImage, onSelectTab,
                     </TabPane>
                     <TabPane tab="YouTube Video" key="2">
                         <div className="youtube-embed">
-                                <h6>YouTube Video ID:</h6>
-                                <Input placeholder="copy link here" onChange={({target}) => setLink('https://www.youtube.com/embed/' + target.value)}/>
-                                {
-                                    link && <iframe width="100%" height="350px" src={link} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen  />
-                                }
-                                <Button type="flashy" onClick={() => onSelectImage(`https://www.youtube.com/embed/${link}`)}>Done</Button>
+                            <h6>YouTube Video ID:</h6>
+                            <Input placeholder="copy link here" onChange={({target}) => setLink(target.value)}/>
+                            {
+                                link && (
+                                    <iframe
+                                        width="100%"
+                                        height="350px"
+                                        src={`https://www.youtube.com/embed/${link}`}
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                    />
+                                )
+                            }
+                            <Button
+                                type="flashy"
+                                onClick={() => onSelectImage(`https://www.youtube.com/embed/${link}`)}>
+                                    Done
+                            </Button>
                         </div>
                     </TabPane>
                 </Tabs>

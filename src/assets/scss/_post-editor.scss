@@ -139,8 +139,8 @@
         }
     }
 
-
-    figure {
+    figure,
+    .iframe-container {
         &:hover .figure-overlay {
             background: rgba(0,0,0,.5);
             visibility: visible;
@@ -170,6 +170,14 @@
             height: 100%;
             object-fit: cover;
             object-position: center center;
+        }
+    }
+
+    .iframe-container {
+        &:hover .figure-overlay {
+            background: white;
+            opacity: .8;
+            color: black;
         }
     }
 }
