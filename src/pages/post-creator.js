@@ -1,17 +1,18 @@
 import React, {useRef, useEffect, useState, useCallback} from 'react'
-import {useLocation, useHistory, withRouter} from 'react-router'
+import {useMutation, useQuery} from '@apollo/react-hooks'
 import {Input} from 'antd'
 import Button from '../components/common/button'
+import ImageSelectorModal from '../components/common/image-selector-modal'
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 
 import featured from '../assets/mocks/featured'
+import {SAVE_POST_MUTATION, PUBLISH_POST_MUTATION} from '../queries/posts'
 
 const images = featured.map(({image}) => image)
 
 const options = {
     placeholder: 'Begin typing your post...',
-    // readOnly: true,
     theme: 'snow'
 };
 
@@ -20,25 +21,35 @@ export default function PostCreator ({match, history}) {
         params: {id}
     } = match
     const quillEditor = useRef(null)
-    const [editorEl, setEditorEl] = useState(null)
+    const [, setEditorEl] = useState(null)
     const [imageModalOpen, setImageModalOpen] = useState(false)
+    const [backgroundImageModalOpen, setBackgroundImageModalOpen] = useState(false)
     const [data, setData] = useState({
         description: '',
         title: '',
         keyword1: '',
         keyword2: '',
-        imageUrl: '',
-        videoUrl: ''
+        bg_src: '',
+        bg_type: 1,
+        categories: []
     })
 
-    console.log(data)
+    const [savePost, {data: savedId}] = useMutation(SAVE_POST_MUTATION)
+    const [publishPost, {data: publishedId}] = useMutation(PUBLISH_POST_MUTATION)
 
     const save = useCallback(() => {
-
+        savePost({variables: { id, data }})
+        .catch(err => console.log(err))
     }, [])
 
-    const publish = useCallback(() => {
-
+    const publish = useCallback(async () => {
+        try {
+            const savedId = await savePost({variables: {id, data}})
+            const pubsishedId = await publishPost({variables: {id}})
+        } catch (err) {
+            console.log(err)
+            // TODO add toaster messages
+        }
     }, [])
 
     const setModel = useCallback((key) => (ev) => {
@@ -57,36 +68,24 @@ export default function PostCreator ({match, history}) {
             <h3 className="align-start">{id ? 'Edit ': 'Create a '} Post</h3>
             <div className="editor-inputs">
                 <div class="image-selector-input">
-                    <figure onClick={() => setImageModalOpen(true)}>
-                        <img src={data.image ? require(`../assets/images/${data.image}`) : `https://cdn5.vectorstock.com/i/thumb-large/99/94/default-avatar-placeholder-profile-icon-male-vector-23889994.jpg`} />
-                        <div className="figure-overlay" >
-                            <span>Change Photo <i className={`fal fa-camera`} /></span>
-                        </div>
-                    </figure>
+                    <div>
+                        <h6>Thumbnail image:</h6>
+                        <figure onClick={() => setImageModalOpen(true)}>
+                            <img src={data.image ? require(`../assets/images/${data.image}`) : `https://cdn5.vectorstock.com/i/thumb-large/99/94/default-avatar-placeholder-profile-icon-male-vector-23889994.jpg`} />
+                            <div className="figure-overlay" >
+                                <span>Change Thumbnail <i className={`fal fa-camera`} /></span>
+                            </div>
+                        </figure>
+                    </div>
+                    
                     {imageModalOpen && (
-                        <div className="image-selector-modal">
-                            <div className="image-selector-header">
-                                <h5>Select an Image</h5>
-                                <Button 
-                                    type="flashy"
-                                    rounded
-                                >
-                                    <span>
-                                        Upload Image <i className={`fal fa-camera`} />
-                                    </span>
-                                </Button>
-                            </div>
-                            <div className="image-selector-images">
-                                {images.map((image) => (
-                                    <figure onClick={() => {
-                                        setData({ ...data, image })
-                                        setImageModalOpen(false)    
-                                    }}>
-                                        <img src={require(`../assets/images/${image}`)} />
-                                    </figure>
-                                ))}
-                            </div>
-                        </div>
+                        <ImageSelectorModal
+                            images={images}
+                            onSelectImage={(image) => {
+                                setData({ ...data, image })
+                                setImageModalOpen(false)
+                            }}
+                        />
                     )}
                 </div>
                 <div>
@@ -106,8 +105,22 @@ export default function PostCreator ({match, history}) {
                         { withLabel(<Input placeholder="Keyword 1" onChange={setModel('keyword1')} />, 'Keyword 1')}
                         { withLabel(<Input placeholder="Keyword 1" onChange={setModel('keyword2')} />, 'Keyword 1')}
                     </div>
+                    <Button type="secondary" onClick={() => setBackgroundImageModalOpen(true)}>Change Background Image</Button>
+                    <p className="text-primary mt-2">{data.bg_src}</p>
+                    {backgroundImageModalOpen && (
+                        <ImageSelectorModal
+                            images={images}
+                            showTabs={true}
+                            onSelectImage={(bg_src) => {
+                                setData({ ...data, bg_src })
+                                setBackgroundImageModalOpen(false)
+                            }}
+                            onSelecTab={(bg_type) => {
+                                setData({...data, bg_type})
+                            }}
+                        />
+                    )}
                 </div>
-
             </div>
             <div ref={quillEditor} />
             <div className="editor-button-container">
@@ -121,7 +134,7 @@ export default function PostCreator ({match, history}) {
 
 const withLabel = (component, label) => (
     <div className="input-container">
-        <span>{label}</span>
+        <h6>{label}</h6>
         { component }
     </div>
 )
