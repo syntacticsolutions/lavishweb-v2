@@ -5,7 +5,7 @@ export default function MasonryPost ({post, tagsOnTop}) {
     const windowWidth = window.innerWidth
     let imageBackground
     try {
-        imageBackground = {backgroundImage: `url("${require(`../../../assets/images/${post.image}`)}")`};
+        imageBackground = {backgroundImage: `url("${require(`../../../assets/images/${post?.image}`)}")`};
     } catch(err) {
         console.log(err)
         return 'Image Not Found'

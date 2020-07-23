@@ -60,7 +60,6 @@ export default function Blog () {
     const trending = useMemo(() => mergeStyles(trendingData?.posts, trendingConfig), [trendingData])
     const featured = useMemo(() => mergeStyles(featuredData?.posts, featuredConfig), [featuredData])
     const lastPost = useMemo(() => featured?.pop(), [featured])
-    console.log({trending, featured})
     
 
     return (

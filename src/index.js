@@ -18,7 +18,9 @@ import { ApolloProvider } from '@apollo/react-hooks';
 
 const cache = new InMemoryCache();
 const link = new HttpLink({
-  uri: 'https://backend.lavishweb.com/graphql'
+  uri: process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000/graphql'
+    : 'https://backend.lavishweb.com/graphql'
 });
 
 const client = new ApolloClient({
