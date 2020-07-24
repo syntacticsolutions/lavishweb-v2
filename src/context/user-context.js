@@ -2,13 +2,12 @@ import React, {useState, createContext, useEffect} from 'react'
 import firebase from 'firebase'
 
 var app = firebase.initializeApp({
-    apiKey: "AIzaSyC60p-vCf_3wnMNJIrBlaGLrPm9AzpeHVQ",
-    authDomain: "relate.lavishweb.com",
-    projectId: "my-project-1567294430480",
-    storageBucket: "my-project-1567294430480.appspot.com",
-    messagingSenderId: "196573664670",
-    appId: "1:196573664670:web:48c93f09ad330fc503b28f",
-    measurementId: "G-N12994Z874"
+    apiKey: "AIzaSyCxXQkfPukVNIJi9f8Nip39CMgAE6LlBF4",
+    authDomain: "backend.lavishweb.com",
+    projectId: "lavishweb-94938",
+    storageBucket: "lavishweb-94938.appspot.com",
+    messagingSenderId: "1061245448867",
+    appId: "1:1061245448867:web:1cc95715f77acb3c43c516"
 });
 
 
@@ -22,6 +21,7 @@ function AuthUserProvider ({children}) {
             .auth()
             .onAuthStateChanged((user) => {
                 if (user) setUser(user)
+                console.log(user)
             })
     }, [])
     
