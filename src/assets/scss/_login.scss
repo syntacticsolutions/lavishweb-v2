@@ -1,5 +1,5 @@
 .signin-container {
-    background: linear-gradient(173deg,transparent, #5ac8fa, transparent, #409cff, transparent);
+    background: linear-gradient(173deg, transparent, rgba(90, 200, 250, .1), transparent, rgba(64, 156, 255, 0.1), transparent);
     height: 100vh;
     display: flex;
     align-items: center;
@@ -7,6 +7,7 @@
     justify-content: center;
 
     .form-container {
+        border: 1px solid $border;
         background: white;
         max-width: 700px;
         width: 90%;
@@ -14,7 +15,7 @@
         bottom: calc((100vh - 500px) / 4);
         min-height: 400px;
         border-radius: 4px;
-        padding: 30px 50px;
+        padding: 60px 80px 100px;
 
         .forgot-pwd {
             margin-bottom: 20px;
