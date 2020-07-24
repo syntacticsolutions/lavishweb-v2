@@ -53,10 +53,10 @@ export default function Home() {
             <Header title="Our Features" text="We offer a myriad of mentorship services to get you that dream job you've always wanted. Opportunities abound!" />
             <IconRow />
 
-            <Header title="Our Pricing" text="Some need advice while others need more in-depth training. Our services are geared towards providing the best solution for you!" />
-            <Pricing />
+            {/* <Header title="Our Pricing" text="Some need advice while others need more in-depth training. Our services are geared towards providing the best solution for you!" /> */}
+            {/* <Pricing /> */}
             <ImageRow images={imageRow1Images} />
-            <Header title="The Professionals" text="All of our Tech Pros come from top-tier tech companies such as Apple, Amazon, Twitter, Facebook, LinkedIn, and Uber. We'll teach you everything that you need to know in order to become an elite coder." />
+            {/* <Header title="The Professionals" text="All of our Tech Pros come from top-tier tech companies such as Apple, Amazon, Twitter, Facebook, LinkedIn, and Uber. We'll teach you everything that you need to know in order to become an elite coder." /> */}
         </div>
     )
 }

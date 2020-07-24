@@ -5,8 +5,8 @@ import Animated from '../common/animated'
 const pricingConfig = [
     {
         title: 'Professional Advice+',
-        price: '$150 / 1 hour',
-        options: ['Design advice', 'Architecture advice', 'Planning advice', 'Free LinkedIn recommendation', 'Some restrictions apply']
+        price: '$50 / 1 hour',
+        options: ['Advice about which tech is most relevant.', 'Architecture advice', 'Planning advice', 'Free LinkedIn recommendation', 'Some restrictions apply']
     },
     {
         title: 'Weekly Training',
@@ -27,7 +27,7 @@ export default function Pricing() {
         <div className="lavish-pricing container">
             <div className="row" ref={container} >
                 {pricingConfig.map((obj, index) => (
-                    <div key={index} className="col-lg-4 col-md-6">
+                    <div key={index} className="col-lg-4 col-md-6 pricing-card">
                         <Animated type="flipInY" delay={index} targetRef={container}  padding={300}>
                             <div className="single-pricing text-center">
                                 <div className="pricing-header">

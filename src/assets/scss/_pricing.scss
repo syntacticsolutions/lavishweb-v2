@@ -1,4 +1,7 @@
 .lavish-pricing {
+    .row {
+        justify-content: center;
+    }
     .single-pricing {
         background: #1a1a1a;
         padding: 40px 20px;
@@ -6,10 +9,12 @@
         transition: .3s;
         margin-bottom: 30px;
     }
+    .pricing-card {
+        max-width: 380px;
+    }
     .pricing-header {
         padding-bottom: 23px;
-        h3 {
-            font-size: 30px;
+        h4 {
             font-weight: 400;
             color: #fff;
             text-transform: uppercase;

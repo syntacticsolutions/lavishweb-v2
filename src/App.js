@@ -6,23 +6,16 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import {WindowScrollProvider} from './context/scroll-context';
 import {withAuthUser} from './context/user-context'
 import PostCreator from './pages/post-creator'
+import Footer from './components/common/footer'
 
 const navLinks = [
   {
-    title: 'Home',
+    title: 'About Us',
     path: '/',
-  },
-  {
-    title: 'Mentoring',
-    path: '/pricing',
   },
   {
     title: 'Blog',
     path: '/blog',
-  },
-  {
-    title: 'Contact',
-    path: '/contact',
   },
   {
     title: "Login",
@@ -36,18 +29,7 @@ const home = navLinks.shift()
 function App() {
   const [lightMode, setLightMode] = useState(true)
 
-  // useEffect(() => {
-  //   // initAuth()
-  //   // .then(user => {
-  //   //   if (!this.$store.state.UserModule.loggedInUser.uid) {
-
-  //   //   }
-  //   // })
-  //   // .catch(err => { this.$router.push('/signin') })
-  // }, [])
-
   return withAuthUser(
-    // return (
     <div className={`App ${lightMode ? 'light' : 'dark'}`}>
       <WindowScrollProvider>
         <Router>
@@ -62,6 +44,7 @@ function App() {
             <Route exact path="/edit-post/:id" component={PostCreator} />
           </Switch>
         </Router>
+        <Footer pages={pages} />
       </WindowScrollProvider>
     </div>
   );
@@ -82,5 +65,11 @@ const getComponent = (link, index) => {
           <Component/>
         </Route>
 }
+
+const pages = [
+  {url: '/', title: 'Home'},
+  {url: '/blog', title: 'Blog'},
+  {url: '/login', title: 'Login / Signup'}
+]
 
 export default App;

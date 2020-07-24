@@ -9,6 +9,8 @@
     text-decoration: none;
     margin: 0 auto;
     min-height: 225px;
+    border: 1px solid $border;
+    border-radius: 4px;
 
     .image-text {
         height: 100%;

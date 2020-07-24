@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react'
+import React, {useMemo, useCallback} from 'react'
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
@@ -63,6 +63,10 @@ export default function Blog () {
     const trending = useMemo(() => mergeStyles(trendingData?.posts, trendingConfig), [trendingData])
     const featured = useMemo(() => mergeStyles(featuredData?.posts, featuredConfig), [featuredData])
     const lastPost = useMemo(() => featured?.pop(), [featured])
+
+    const goTo = useCallback(() => {
+
+    }, [])
     
 
     return (
@@ -71,21 +75,43 @@ export default function Blog () {
                 <div className="row">
                     {featured && (
                         <section className="featured-posts-container">
-                            <PostMasonry posts={featured} columns={2} tagsOnTop={true} />
-                            <MasonryPost post={lastPost} tagsOnTop={true} />
+                            <PostMasonry 
+                                onSelect={goTo} 
+                                posts={featured} 
+                                columns={2} 
+                                tagsOnTop={true}
+                            />
+                            <MasonryPost 
+                                onSelect={goTo} 
+                                post={lastPost} 
+                                tagsOnTop={true} 
+                            />
                         </section>
                     )}
                 </div>
                 <section className="container">
                     <div className="row">
                         <h1>Recent Posts</h1>
-                        { homeData?.posts && <PostGrid posts={homeData.posts} /> }
+                        { 
+                            homeData?.posts && (
+                                <PostGrid
+                                    onSelect={goTo}
+                                    posts={homeData.posts}
+                                />)
+                        }
                     </div>
                 </section>
                 
                 <section className="container">
                     <div className="row">
-                    { trending && <PostMasonry posts={trending} columns={3}/> }
+                    { 
+                        trending && (
+                            <PostMasonry 
+                                onSelect={goTo}
+                                posts={trending}
+                                columns={3}/>
+                        )
+                    }
                     </div>
                 </section>
             </section>

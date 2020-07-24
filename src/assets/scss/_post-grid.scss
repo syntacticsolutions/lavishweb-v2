@@ -1,4 +1,6 @@
 .grid-pagination-container {
+    width: 100%;
+
     .ant-pagination {
         text-align: center;
         padding-bottom: 50px;
@@ -35,6 +37,9 @@
     figure {
         height: 100%;
         max-height: 280px;
+        border: 1px solid $border;
+        border-radius: 4px;
+        overflow: hidden;
     }
 
     img {
