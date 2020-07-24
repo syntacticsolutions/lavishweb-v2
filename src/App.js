@@ -46,8 +46,8 @@ function App() {
           <Switch>
             <Route exact path="/" component={() => React.createElement(require('./pages/home').default)} />
             {navLinks.map(getComponent)}
-            <Route path="/edit-post" component={PostCreator}>
-            </Route>
+            <Route exact path="/edit-post" component={PostCreator} />
+            <Route exact path="/edit-post/:id" component={PostCreator} />
           </Switch>
         </Router>
       </WindowScrollProvider>

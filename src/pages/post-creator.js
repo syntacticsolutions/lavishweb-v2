@@ -23,50 +23,56 @@ export default function PostCreator ({match, history}) {
     const {
         params: {id}
     } = match
+
     const quillEditor = useRef(null)
-    const [, setEditorEl] = useState(null)
+    const [editorEl, setEditorEl] = useState(null)
     const [imageModalOpen, setImageModalOpen] = useState(false)
     const [backgroundImageModalOpen, setBackgroundImageModalOpen] = useState(false)
-    const [data, setData] = useState({
+    const [modelData, setModelData] = useState({
         description: '',
         title: '',
         keyword1: '',
         keyword2: '',
         bg_src: '',
         bg_type: 1,
-        categories: [] // TODO add input for this
+        categories: [],
+        text: ''
     })
 
     const [savePost, {data: savedId}] = useMutation(SAVE_POST_MUTATION)
     const [publishPost, {data: publishedId}] = useMutation(PUBLISH_POST_MUTATION)
     const {data: catData, error, loading} = useQuery(GET_CATEGORIES_QUERY)
 
-    const save = useCallback(() => {
-        savePost({variables: { id, data }})
-        .catch(err => {
-            console.log(err)
-            // TODO add toaster messages
-        })
-    }, [])
+    const save = useCallback(async () => {
+        let text = editorEl.getContents()
+        let {data} = await savePost({variables: { id, data: {...modelData, text: JSON.stringify(text) }}})
+            .catch(err => {
+                console.log(err)
+                // TODO add toaster messages
+            })
+        history.replace(`/edit-post/${data.savePost}`)
+
+    }, [editorEl, modelData, savedId])
 
     const publish = useCallback(async () => {
-        try {
-            const savedId = await savePost({variables: {id, data}})
-            const pubsishedId = await publishPost({variables: {id}})
-        } catch (err) {
-            console.log(err)
-            // TODO add toaster messages
+        let savedId
+        if (!id) {
+            const postData = await savePost({variables: {id, modelData}})
+        } else {
+            savedId = id
         }
-    }, [])
+        const pubsishedId = await publishPost({variables: {id: savedId}})
+
+    }, [modelData, editorEl, id])
 
     const setModel = useCallback((key) => (ev) => {
-        setData({
-            ...data,
+        setModelData({
+            ...modelData,
             [key]: ev.target.value
         })
-    }, [data])
+    }, [modelData])
 
-    useEffect(() => {
+    useEffect(async () => {
         setEditorEl(new Quill(quillEditor.current, options))
     }, [])
 
@@ -78,13 +84,13 @@ export default function PostCreator ({match, history}) {
                     <div>
                         <h6>Background image/video:</h6>
                         {
-                            data.bg_type === '2' &&
+                            modelData.bg_type === '2' &&
                                 <section className="iframe-container" onClick={() => setBackgroundImageModalOpen(true)} >
-                                    {data.bg_src &&
+                                    {modelData.bg_src &&
                                         <iframe
                                             width="100%"
                                             height="300px"
-                                            src={data.bg_src}
+                                            src={modelData.bg_src}
                                             frameborder="0"
                                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                             allowfullscreen
@@ -99,8 +105,8 @@ export default function PostCreator ({match, history}) {
                             (
                                 <figure onClick={() => setBackgroundImageModalOpen(true)}>
                                     <img src={
-                                        data.bg_src
-                                        ? require(`../assets/images/${data.bg_src}`)
+                                        modelData.bg_src
+                                        ? require(`../assets/images/${modelData.bg_src}`)
                                         : `https://cdn5.vectorstock.com/i/thumb-large/99/94/default-avatar-placeholder-profile-icon-male-vector-23889994.jpg`}
                                     />
                                     <div className="figure-overlay" >
@@ -116,12 +122,12 @@ export default function PostCreator ({match, history}) {
                             images={images}
                             showTabs={true}
                             onSelectImage={(bg_src) => {
-                                setData({ ...data, bg_src })
+                                setModelData({ ...modelData, bg_src })
                                 setBackgroundImageModalOpen(false)
                             }}
                             onSelectTab={(bg_type) => {
                                 console.log({bg_type})
-                                setData({...data, bg_type})
+                                setModelData({...modelData, bg_type})
                             }}
                         />
                     )} 
@@ -167,12 +173,12 @@ export default function PostCreator ({match, history}) {
                         )
                     }
                     <Button type="secondary" onClick={() => setImageModalOpen(true)}>Change Thumbnail</Button>
-                    <p className="text-primary mt-2">{data.image}</p>                
+                    <p className="text-primary mt-2">{modelData.image}</p>                
                     {imageModalOpen && (
                         <ImageSelectorModal
                             images={images}
                             onSelectImage={(image) => {
-                                setData({ ...data, image })
+                                setModelData({ ...modelData, image })
                                 setImageModalOpen(false)
                             }}
                         />
