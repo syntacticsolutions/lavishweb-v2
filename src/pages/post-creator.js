@@ -3,6 +3,8 @@ import {useMutation, useQuery} from '@apollo/react-hooks'
 import {Input, Select} from 'antd'
 
 import Button from '../components/common/button'
+import {withLabel} from '../components/common/hoc'
+import {useAuthUser} from '../context/user-context'
 import ImageSelectorModal from '../components/common/image-selector-modal'
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
@@ -23,6 +25,8 @@ export default function PostCreator ({match, history}) {
     const {
         params: {id}
     } = match
+
+    const [user, setUser] = useAuthUser()
 
     const quillEditor = useRef(null)
     const [editorEl, setEditorEl] = useState(null)
@@ -126,7 +130,6 @@ export default function PostCreator ({match, history}) {
                                 setBackgroundImageModalOpen(false)
                             }}
                             onSelectTab={(bg_type) => {
-                                console.log({bg_type})
                                 setModelData({...modelData, bg_type})
                             }}
                         />
@@ -194,10 +197,3 @@ export default function PostCreator ({match, history}) {
         </section>
     )
 }
-
-const withLabel = (component, label) => (
-    <div className="input-container">
-        <h6>{label}</h6>
-        { component }
-    </div>
-)

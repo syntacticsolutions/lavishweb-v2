@@ -13,7 +13,6 @@
 @import './background-image';
 @import './pricing';
 @import './image-row';
-@import './home';
 @import './toggle';
 @import './blog';
 @import './post-grid';
@@ -21,7 +20,14 @@
 @import './masonry-posts';
 @import './tag-row';
 @import './navigation';
+
+/* Pages */
+
 @import './post-editor';
+@import './login';
+@import './home';
+
+/* Pages */
 
 
 h1 {
