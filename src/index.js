@@ -15,17 +15,30 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloLink, concat } from '@apollo/client'
 
 const cache = new InMemoryCache();
-const link = new HttpLink({
+const httpLink = new HttpLink({
   uri: process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000/graphql'
-    : 'https://backend.lavishweb.com/graphql'
+    : 'https://backend.lavishweb.com/graphql',
+    credentials: 'include'
 });
 
-const client = new ApolloClient({
+const authMiddleware = new ApolloLink((operation, forward) => {
+  // add the authorization to the headers
+  operation.setContext({
+    headers: {
+      authorization: localStorage.getItem('token') || null,
+    }
+  });
+
+  return forward(operation);
+})
+
+export const client = new ApolloClient({
   cache,
-  link
+  link: concat(authMiddleware, httpLink),
 });
 
 ReactDOM.render(

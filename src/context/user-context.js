@@ -10,7 +10,6 @@ var app = firebase.initializeApp({
     appId: "1:1061245448867:web:1cc95715f77acb3c43c516"
 });
 
-
 const AuthUserContext = createContext(undefined)
 
 function AuthUserProvider ({children}) {
@@ -21,7 +20,10 @@ function AuthUserProvider ({children}) {
             .auth()
             .onAuthStateChanged((user) => {
                 if (user) setUser(user)
-                console.log(user)
+                user.getIdToken().then(function (accessToken) {
+                    localStorage.setItem('token', `Bearer ${accessToken}`)
+                    // TODO get Perms
+                })
             })
     }, [])
     
