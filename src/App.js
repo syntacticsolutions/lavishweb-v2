@@ -33,7 +33,7 @@ const navLinks = [
 const home = navLinks.shift()
 
 function App() {
-  const [lightMode, setLightMode] = useState(false)
+  const [lightMode, setLightMode] = useState(true)
 
   return (
     <div className={`App ${lightMode ? 'light' : 'dark'}`}>

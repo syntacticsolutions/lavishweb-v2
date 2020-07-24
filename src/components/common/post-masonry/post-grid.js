@@ -43,7 +43,7 @@ export default function PostGrid ({posts}) {
                                 </Link>
                             </figure>
                             <TagRow tags={post.categories} />
-                            <h2>{post.title}</h2>
+                            <h3>{post.title}</h3>
                             <p className="author-text">
                                 <span>
                                     By:

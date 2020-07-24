@@ -7,20 +7,23 @@ import {PostMasonry, MasonryPost, PostGrid} from '../components/common/post-maso
 const trendingConfig = {
     1: {
         gridArea: '1 / 2 / 3 / 3',
+        height: '650px',
+        width: '400px'
     }
 }
 
 const featuredConfig = {
     0: {
         gridArea: '1 / 1 / 2 / 3',
-        height: '300px'
+        height: '400px'
     },
     1: {
-        height: '300px'
+        height: '400px'
     },
     3: {
-        height: '630px',
+        height: '830px',
         marginLeft: '30px',
+        width: '500px   '
     }
 }
 
