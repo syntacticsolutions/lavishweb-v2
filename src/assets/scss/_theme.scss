@@ -39,7 +39,9 @@ body {
             color: $text;
         }
         .masonry-post .image-title {
-            color: #777;
+            color: #888;
+            font-weight: 300;
+            font-size: 26px;
         }
         .lavish-background-image .header h1, p {
             color: $text;
@@ -109,7 +111,7 @@ body {
 
         .post-container {
             h3 {
-                color: #666;
+                color: #555;
             }
     
             .description-text {
@@ -125,6 +127,10 @@ body {
             h2, p {
                 color: white;
             }
+        }
+
+        .lavish-footer {
+            background: #f1f1f1;
         }
     
     }

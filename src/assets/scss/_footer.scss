@@ -2,7 +2,7 @@
     width: 100%;
     padding: 5%;
 
-    background: #f1f1f1;
+    background: #444;
     border-top: 1px solid $border;
 
     ul {
@@ -13,5 +13,8 @@
             margin: 20px;
             color: $secondary;
         }
+    }
+    p {
+        color: white;
     }
 }
