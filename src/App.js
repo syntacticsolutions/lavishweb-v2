@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import MenuBar from './components/menu-bar'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
-
 import {WindowScrollProvider} from './context/scroll-context';
 import {withAuthUser} from './context/user-context'
 import PostCreator from './pages/post-creator'
@@ -10,19 +9,30 @@ import Footer from './components/common/footer'
 
 const navLinks = [
   {
-    title: 'About Us',
-    path: '/',
-  },
-  {
     title: 'Blog',
     path: '/blog',
+  },
+  {
+    title: 'Web Dev',
+    path: '/web-dev'
+  },
+  {
+    title: 'Cloud',
+    path: '/cloud'
+  },
+  {
+    title: 'Algorithms',
+    path: '/algorithms'
+  },
+  {
+    title: 'Brain Hacking',
+    path: '/health'
   },
   {
     title: "Login",
     path: '/login'
   }
 ]
-
 
 const home = navLinks.shift()
 
