@@ -3,12 +3,15 @@
 
     .ant-pagination {
         text-align: center;
-        padding-bottom: 50px;
+        padding-bottom: 50px;     
     }
     .ant-pagination-simple,
     .anticon-left,
     .anticon-right {
         color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;   
     }
     .ant-pagination-simple-pager input {
         background-color: #333;
