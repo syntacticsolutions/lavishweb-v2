@@ -22,14 +22,13 @@ const httpLink = new HttpLink({
   uri: process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000/graphql'
     : 'https://backend.lavishweb.com/graphql',
-    credentials: 'include'
 });
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   // add the authorization to the headers
   operation.setContext({
     headers: {
-      authorization: localStorage.getItem('token') || null,
+      Authorization: localStorage.getItem('token') || null,
     }
   });
 

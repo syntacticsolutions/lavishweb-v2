@@ -19,11 +19,13 @@ function AuthUserProvider ({children}) {
         firebase
             .auth()
             .onAuthStateChanged((user) => {
-                if (user) setUser(user)
-                user.getIdToken().then(function (accessToken) {
-                    localStorage.setItem('token', `Bearer ${accessToken}`)
-                    // TODO get Perms
-                })
+                if (user) {
+                    setUser(user)
+                    user.getIdToken().then(function (accessToken) {
+                        localStorage.setItem('token', `Bearer ${accessToken}`)
+                        // TODO get Perms
+                    })
+                }
             })
     }, [])
     
