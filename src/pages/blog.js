@@ -7,23 +7,23 @@ import {PostMasonry, MasonryPost, PostGrid} from '../components/common/post-maso
 const trendingConfig = {
     1: {
         gridArea: '1 / 2 / 3 / 3',
-        height: '650px',
-        width: '400px'
+        height: '600px',
+        width: '350px'
     }
 }
 
 const featuredConfig = {
     0: {
         gridArea: '1 / 1 / 2 / 3',
-        height: '400px'
+        height: '300px'
     },
     1: {
-        height: '400px'
+        height: '300px'
     },
     3: {
-        height: '830px',
+        height: '630px',
         marginLeft: '30px',
-        width: '500px   '
+        width: '550px   '
     }
 }
 
@@ -55,7 +55,7 @@ const options = (type) => ({
     }
 })
 
-export default function Blog () {
+export default function Blog ({history}) {
     const {data: trendingData, error, loading} = useQuery(GET_BLOG_POSTS_QUERY, options('trending'))
     const {data: featuredData} = useQuery(GET_BLOG_POSTS_QUERY, options('featured'))
     const {data: homeData} = useQuery(GET_BLOG_POSTS_QUERY, options('default'))
@@ -72,6 +72,7 @@ export default function Blog () {
     return (
         <main className="home">
             <section className="container">
+                <h1>Lavish Blog</h1>
                 <div className="row">
                     {featured && (
                         <section className="featured-posts-container">
