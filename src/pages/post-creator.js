@@ -10,7 +10,12 @@ import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 
 import featured from '../assets/mocks/featured'
-import {SAVE_POST_MUTATION, PUBLISH_POST_MUTATION, GET_CATEGORIES_QUERY} from '../queries/posts'
+import {
+    SAVE_POST_MUTATION,
+    PUBLISH_POST_MUTATION,
+    GET_CATEGORIES_QUERY,
+    GET_POST_QUERY
+} from '../queries/posts'
 
 const { Option } = Select;
 
@@ -40,21 +45,32 @@ export default function PostCreator ({match, history}) {
         bg_src: '',
         bg_type: 1,
         categories: [],
-        text: ''
     })
 
     const [savePost, {data: savedId}] = useMutation(SAVE_POST_MUTATION)
     const [publishPost, {data: publishedId}] = useMutation(PUBLISH_POST_MUTATION)
     const {data: catData, error, loading} = useQuery(GET_CATEGORIES_QUERY)
+    const {
+        data: postData,
+        error:postError,
+        loading: loadingPost
+    } = useQuery(GET_POST_QUERY, {
+        variables: {id},
+        onCompleted: ({post}) => {
+            let newModel = {}
+
+            for (let id in modelData) {
+                newModel[id] = post[id]
+            }
+            editorEl.setContents(JSON.parse(post.text))
+            setModelData(newModel)
+        }
+    })
 
     const save = useCallback(async () => {
         let text = editorEl.getContents()
-        let id = await savePost({variables: { id, data: {...modelData, text: JSON.stringify(text) }}})
-            .catch(err => {
-                console.log(err)
-                // TODO add toaster messages
-            })
-        history.replace(`/edit-post/${id.data.savePost}`)
+        let savedId = (await savePost({variables: { id, data: {...modelData, text: JSON.stringify(text) }}})).data.savePost
+        history.replace(`/edit-post/${savedId}`)
 
     }, [editorEl, modelData, savedId])
 
@@ -63,7 +79,6 @@ export default function PostCreator ({match, history}) {
         if (!id) {
             let text = editorEl.getContents()
             savedId = (await savePost({variables: { id, data: {...modelData, text: JSON.stringify(text) }}})).data.savePost
-            console.log(savedId)
         } else {
             savedId = id
         }
@@ -140,27 +155,48 @@ export default function PostCreator ({match, history}) {
                 <div>
                     { withLabel(
                         <Input
+                            value={modelData.title}
                             placeholder="Post Title"
                             onChange={setModel('title')}
                         />, 'Title')
                     }
                     { withLabel(
                         <Input
+                            value={modelData.description}
                             placeholder="Description"
                             onChange={setModel('description')}
                         />, 'Description')
                     }
                     <div className="flex keyword-inputs">
-                        { withLabel(<Input placeholder="Keyword 1" onChange={setModel('keyword1')} />, 'Keyword 1')}
-                        { withLabel(<Input placeholder="Keyword 1" onChange={setModel('keyword2')} />, 'Keyword 1')}
+                        { 
+                            withLabel(
+                                <Input
+                                    value={modelData.keyword1}
+                                    placeholder="Keyword 1"
+                                    onChange={setModel('keyword1')}
+                                />,
+                                'Keyword 1'
+                            )
+                        }
+                        {
+                            withLabel(
+                                <Input
+                                    value={modelData.keyword2}
+                                    placeholder="Keyword 2"
+                                    onChange={setModel('keyword2')}
+                                />,
+                                'Keyword 2'
+                            )
+                        }
                     </div>
                     {
                         catData?.categories && withLabel(
                             <Select
+                                value={modelData.categories}
                                 mode="multiple"
                                 style={{ width: '100%' }}
                                 placeholder="Select categories"
-                                onChange={(val) => console.log(val)}
+                                onChange={(value) => setModel('categories')({target:{value}})}
                                 optionLabelProp="label"
                             >
                                 {

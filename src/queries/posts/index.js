@@ -20,3 +20,26 @@ export const GET_CATEGORIES_QUERY = gql`
         }
     }
 `
+
+export const GET_POST_QUERY = gql`
+    query GetPost($id: ID) {
+        post: getPost (id: $id) {
+            author
+            author_id
+            title
+            description
+            text
+            bg_type
+            bg_src
+            comments {
+                id
+                comment
+            }
+            likes
+            categories
+            updated_at
+            keyword1
+            keyword2
+        } 
+    }
+`;
