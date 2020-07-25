@@ -1,14 +1,15 @@
 import React, {useMemo, useCallback} from 'react'
 import { useQuery } from '@apollo/react-hooks';
+import {BlogMain} from '../components/common/hoc'
 import gql from 'graphql-tag';
 
+import  {GET_BLOG_POSTS_QUERY} from '../queries/posts'
 import {PostMasonry, MasonryPost, PostGrid} from '../components/common/post-masonry'
 
 const trendingConfig = {
     1: {
         gridArea: '1 / 2 / 3 / 3',
         height: '600px',
-        width: '350px'
     }
 }
 
@@ -35,20 +36,6 @@ const mergeStyles = function (posts, config){
     })
 }
 
-const GET_BLOG_POSTS_QUERY = gql`
-    query GetBlogPosts($type: String) {
-        posts: getPostsByType(type: $type) {
-            id
-            title
-            description
-            updated_at
-            author
-            image
-            categories
-        }
-    }
-`
-
 const options = (type) => ({
     variables: {
         type
@@ -70,51 +57,49 @@ export default function Blog ({history}) {
     
 
     return (
-        <main className="home">
-            <section className="container">
+        <BlogMain>
+            <div className="row">
                 <h1>Blog</h1>
+                {featured && (
+                    <section className="featured-posts-container">
+                        <PostMasonry 
+                            onSelect={goTo} 
+                            posts={featured} 
+                            columns={2} 
+                            tagsOnTop={true}
+                        />
+                        <MasonryPost 
+                            onSelect={goTo} 
+                            post={lastPost} 
+                            tagsOnTop={true} 
+                        />
+                    </section>
+                )}
+            </div>
+            <section className="container">
                 <div className="row">
-                    {featured && (
-                        <section className="featured-posts-container">
-                            <PostMasonry 
-                                onSelect={goTo} 
-                                posts={featured} 
-                                columns={2} 
-                                tagsOnTop={true}
-                            />
-                            <MasonryPost 
-                                onSelect={goTo} 
-                                post={lastPost} 
-                                tagsOnTop={true} 
-                            />
-                        </section>
-                    )}
-                </div>
-                <section className="container">
-                    <div className="row">
-                        <h1>Recent Posts</h1>
-                        { 
-                            homeData?.posts && (
-                                <PostGrid
-                                    onSelect={goTo}
-                                    posts={homeData.posts}
-                                />)
-                        }
-                    </div>
-                </section>
-                
-                <section className="container">
-                    <div className="row">
+                    <h1>Recent Posts</h1>
                     { 
-                        trending && (
-                            <PostMasonry 
+                        homeData?.posts && (
+                            <PostGrid
                                 onSelect={goTo}
-                                posts={trending}
-                                columns={3}/>
-                        )
+                                posts={homeData.posts}
+                            />)
                     }
-                    </div>
-                </section>
+                </div>
             </section>
-        </main>
+            
+            <section className="container">
+                <div className="row trending-posts-container">
+                { 
+                    trending && (
+                        <PostMasonry 
+                            onSelect={goTo}
+                            posts={trending}
+                            columns={3}/>
+                    )
+                }
+                </div>
+            </section>
+        </BlogMain>
     )}

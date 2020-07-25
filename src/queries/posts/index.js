@@ -43,3 +43,31 @@ export const GET_POST_QUERY = gql`
         } 
     }
 `;
+
+export const GET_BLOG_POSTS_QUERY = gql`
+    query GetBlogPosts($type: String) {
+        posts: getPostsByType(type: $type) {
+            id
+            title
+            description
+            updated_at
+            author
+            image
+            categories
+        }
+    }
+`
+
+export const GET_BLOG_POSTS_BY_CATEGORY_QUERY = gql`
+    query GetBlogPostsByCategory($cat_ids: [Int]) {
+        posts: getPostsByCategories(cat_ids: $cat_ids) {
+            id
+            title
+            description
+            updated_at
+            author
+            image
+            categories
+        }
+    }
+`

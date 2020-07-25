@@ -34,8 +34,6 @@ const navLinks = [
   }
 ]
 
-const home = navLinks.shift()
-
 function App() {
   const [lightMode, setLightMode] = useState(true)
 
@@ -45,7 +43,7 @@ function App() {
         <Router>
           <MenuBar
             onSetLightMode={setLightMode}
-            {...{lightMode, navLinks: [home, ...navLinks]}}
+            {...{lightMode, navLinks}}
           />
           <Switch>
             <Route exact path="/" component={() => React.createElement(require('./pages/home').default)} />

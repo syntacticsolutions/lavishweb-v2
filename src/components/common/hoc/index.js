@@ -6,3 +6,13 @@ export const  withLabel = (component, label) => (
         { component }
     </div>
 )
+
+export const BlogMain = ({children}) => {
+    return (
+        <main className="home">
+            <section className="container">
+                {children}
+            </section>
+        </main>
+    )
+}

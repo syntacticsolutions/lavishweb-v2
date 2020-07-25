@@ -1,5 +1,5 @@
 .home {
-    padding: 7% 0;
+    padding: 4% 0;
 
     h1 {
         width: 100%;
@@ -27,6 +27,17 @@
         .featured-posts-container {
             flex-direction: column;
             width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .home {
+        .featured-posts-container,
+        .trending-posts-container {
+            > a:nth-child(2) {
+                display: none;
+            }
         }
     }
 }

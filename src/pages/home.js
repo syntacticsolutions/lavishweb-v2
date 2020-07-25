@@ -2,9 +2,6 @@ import React, {useRef} from 'react'
 import DualImageLink from '../components/common/dual-image-link';
 import Header from '../components/common/header'
 import IconRow from '../components/common/icon-row'
-import BackgroundImage from '../components/common/background-image'
-import Animated from '../components/common/animated'
-import Pricing from '../components/pricing'
 import ImageRow from '../components/common/image-row';
 
 import introVideo from '../assets/images/Montage.mp4'
