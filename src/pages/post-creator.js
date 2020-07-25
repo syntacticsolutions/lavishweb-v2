@@ -49,19 +49,21 @@ export default function PostCreator ({match, history}) {
 
     const save = useCallback(async () => {
         let text = editorEl.getContents()
-        let {data} = await savePost({variables: { id, data: {...modelData, text: JSON.stringify(text) }}})
+        let id = await savePost({variables: { id, data: {...modelData, text: JSON.stringify(text) }}})
             .catch(err => {
                 console.log(err)
                 // TODO add toaster messages
             })
-        history.replace(`/edit-post/${data.savePost}`)
+        history.replace(`/edit-post/${id.data.savePost}`)
 
     }, [editorEl, modelData, savedId])
 
     const publish = useCallback(async () => {
         let savedId
         if (!id) {
-            const postData = await savePost({variables: {id, modelData}})
+            let text = editorEl.getContents()
+            savedId = (await savePost({variables: { id, data: {...modelData, text: JSON.stringify(text) }}})).data.savePost
+            console.log(savedId)
         } else {
             savedId = id
         }
