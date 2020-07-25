@@ -72,7 +72,7 @@ export default function Blog ({history}) {
     return (
         <main className="home">
             <section className="container">
-                <h1>Lavish Blog</h1>
+                <h1>Blog</h1>
                 <div className="row">
                     {featured && (
                         <section className="featured-posts-container">
