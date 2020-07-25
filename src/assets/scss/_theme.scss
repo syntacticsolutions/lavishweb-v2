@@ -2,6 +2,10 @@ body {
     .App.light {
         background-color: $lightmode;
 
+        .overlay::before {
+            background: linear-gradient(180deg, transparent 0%, transparent 20%, rgba(255, 255, 255, 0.8) 70%, rgba(255, 255, 255, 0.9) 100%)
+        }
+
         .home .row h1 {
             color: #333;
         }
@@ -15,9 +19,6 @@ body {
             background-color: $lightmode;
         }
 
-        .overlay2::before {
-            background-color: $lightmode;
-        }
         .overlay2 {
             color: $text;
         }
@@ -36,6 +37,9 @@ body {
         }
         .lavish-animate {
             color: $text;
+        }
+        .masonry-post .image-title {
+            color: #777;
         }
         .lavish-background-image .header h1, p {
             color: $text;
@@ -72,7 +76,7 @@ body {
             color: #555;
         }
         .lavish-background-image .header h1, p {
-            color: #555 !important;
+            color: #555;
         }       
         .lavish-pricing{
             max-width: 1500px;
@@ -105,7 +109,7 @@ body {
 
         .post-container {
             h3 {
-                color: #333;
+                color: #666;
             }
     
             .description-text {
@@ -113,13 +117,14 @@ body {
             }
         }
 
-
         .lavish-menu-bar {
             box-shadow: 2px 2px 7px #ccc;
         }
 
-        .dual-link-image h2 {
-            color: #333;
+        .dual-link-image {
+            h2, p {
+                color: white;
+            }
         }
     
     }

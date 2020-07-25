@@ -20,8 +20,8 @@ const images = [
   
   const imageTexts = [
     {
-      title: 'Software Mentorship',
-      text: 'Learn how to build complex web projects like the pros with feedback sessions, weekly mentorship, and intensive project building jams.'
+      title: 'Web Development Courses',
+      text: 'Learn how to build complex web projects like the pros with weekly mentorship and intensive project building jams.'
     },
     {
       title: 'Coding Blog',
