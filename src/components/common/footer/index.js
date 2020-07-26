@@ -4,8 +4,8 @@ export default function Footer ({pages, history}) {
     return (
         <footer className="lavish-footer">
             <ul>
-                {Array.isArray(pages) && pages.map(page => (
-                    <li>
+                {Array.isArray(pages) && pages.map((page, index) => (
+                    <li key={index}>
                         <a href={page.url} >
                             - {page.title}
                         </a>

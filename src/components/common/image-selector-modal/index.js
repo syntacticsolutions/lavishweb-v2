@@ -69,7 +69,7 @@ const ImageList = ({images, onSelect}) => (
             <figure onClick={() =>
                 onSelect(image)
             }>
-                <img src={require(`../../../assets/images/${image}`)} />
+                <img src={image} />
             </figure>
         ))}
     </div>

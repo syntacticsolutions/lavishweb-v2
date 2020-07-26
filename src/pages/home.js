@@ -22,7 +22,7 @@ const images = [
     },
     {
       title: 'Coding Blog',
-      text: 'Check out some videos and blog posts from web creators that have over 12 years of experience in the software industry.'
+      text: 'Check out some videos and blog posts from all kinds of tech creators with various backgrounds.'
     }
   ]
   

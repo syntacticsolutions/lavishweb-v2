@@ -17,6 +17,10 @@ import {
     GET_POST_QUERY
 } from '../queries/posts'
 
+import {
+    LIST_IMAGES_QUERY
+} from '../queries/images'
+
 const { Option } = Select;
 
 const images = featured.map(({image}) => image)
@@ -47,6 +51,7 @@ export default function PostCreator ({match, history}) {
         categories: [],
     })
 
+    const {data: blogImageLinks, bIerror, bIloading} = useQuery(LIST_IMAGES_QUERY)
     const [savePost, {data: savedId}] = useMutation(SAVE_POST_MUTATION)
     const [publishPost, {data: publishedId}] = useMutation(PUBLISH_POST_MUTATION)
     const {data: catData, error, loading} = useQuery(GET_CATEGORIES_QUERY)
@@ -138,9 +143,9 @@ export default function PostCreator ({match, history}) {
                             )
                         }
                     </div>
-                    {backgroundImageModalOpen && (
+                    {backgroundImageModalOpen && blogImageLinks.listImages && (
                         <ImageSelectorModal
-                            images={images}
+                            images={blogImageLinks.listImages.map(({url}) => url)}
                             showTabs={true}
                             onSelectImage={(bg_src) => {
                                 setModelData({ ...modelData, bg_src })
@@ -215,9 +220,9 @@ export default function PostCreator ({match, history}) {
                     }
                     <Button type="secondary" onClick={() => setImageModalOpen(true)}>Change Thumbnail</Button>
                     <p className="text-primary mt-2">{modelData.image}</p>                
-                    {imageModalOpen && (
+                    {imageModalOpen && blogImageLinks.listImages && (
                         <ImageSelectorModal
-                            images={images}
+                            images={blogImageLinks.listImages.map(({url}) => url)}
                             onSelectImage={(image) => {
                                 setModelData({ ...modelData, image })
                                 setImageModalOpen(false)
