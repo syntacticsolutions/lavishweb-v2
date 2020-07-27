@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import MenuBar from './components/menu-bar'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import {WindowScrollProvider} from './context/scroll-context';
 import {withAuthUser} from './context/user-context'
 import PostCreator from './pages/post-creator'
+import PostViewer from './pages/post-viewer'
 import Footer from './components/common/footer'
 
 const navLinks = [
@@ -50,6 +51,8 @@ function App() {
             {navLinks.map(getComponent)}
             <Route exact path="/edit-post" component={PostCreator} />
             <Route exact path="/edit-post/:id" component={PostCreator} />
+            <Route path='/view-post/:id' component={PostViewer} />
+            <Route path='/view-post/:id/:slug' component={PostViewer} />
           </Switch>
         </Router>
         <Footer pages={pages} />
@@ -60,18 +63,17 @@ function App() {
 
 
 const getComponent = (link, index) => {
-  let Component
+  let component
   try {
-    Component = require(`./pages${link.path}`).default
+    component = require(`./pages${link.path}`).default
   } catch(err) {
-    Component = () => <div style={{color:'white'}}>Under Construction</div>
+    component = () => <div style={{color:'white'}}>Under Construction</div>
   }
   return <Route
           key={index}
           path={link.path}
-        >
-          <Component/>
-        </Route>
+          component={component}
+        />
 }
 
 const pages = [

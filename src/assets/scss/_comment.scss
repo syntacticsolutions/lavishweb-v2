@@ -1,0 +1,27 @@
+.comment-container {
+    padding: 15px;
+    .comment-author {
+        display: flex;
+        align-items: center;
+    }
+
+    img {
+        border-radius: 50%;
+        border: 1px solid $border;
+        margin-right: 20px;
+    }
+
+    h5, h6 {
+        font-weight: 400;
+    }
+
+    h6 {
+        font-size: 14px;
+        color: #999;
+    }
+
+    p, button {
+        margin-left: 80px;
+        font-weight:300;
+    }
+}

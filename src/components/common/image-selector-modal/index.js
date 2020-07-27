@@ -40,6 +40,7 @@ export default function ImageSelectorModal({ images, onSelectImage, onSelectTab,
                             {
                                 link && (
                                     <iframe
+                                        title="youtube-video-iframe"
                                         width="100%"
                                         height="350px"
                                         src={`https://www.youtube.com/embed/${link}`}
@@ -69,7 +70,7 @@ const ImageList = ({images, onSelect}) => (
             <figure onClick={() =>
                 onSelect(image)
             }>
-                <img src={image} />
+                <img src={image} alt={image} />
             </figure>
         ))}
     </div>

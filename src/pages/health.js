@@ -6,7 +6,7 @@ import {BlogMain} from '../components/common/hoc'
 const catIds = [6]
 
 export default function BrainHacking () {
-    let {data, loading, error} = usePostsByCategoriesHook(catIds)
+    let {data} = usePostsByCategoriesHook(catIds)
 
     const goTo = useCallback(() => {
 

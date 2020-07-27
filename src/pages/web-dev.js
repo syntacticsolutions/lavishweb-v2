@@ -6,7 +6,7 @@ import {BlogMain} from '../components/common/hoc'
 const catIds = [1,2,3,4,5,9]
 
 export default function WebDev () {
-    let {data, loading, error} = usePostsByCategoriesHook(catIds)
+    let {data} = usePostsByCategoriesHook(catIds)
 
     const goTo = useCallback(() => {
 

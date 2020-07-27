@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React from 'react'
 import DualImageLink from '../components/common/dual-image-link';
 import Header from '../components/common/header'
 import IconRow from '../components/common/icon-row'
@@ -10,8 +10,6 @@ const images = [
     'contemporary-corporate-digital-technology-data-PNWFTUE.jpg',
     'close-up-view-of-business-man-working-place-2F3WVND.jpg',
   ]
-  
-  const promoImage = require('../assets/images/cyber-monday-promotion-poster-X2CDZUJ.jpg')
   
   const resolvedImages = images.map(image => require(`../assets/images/${image}`))
   
@@ -36,7 +34,6 @@ const images = [
   ].map(({path, ...rest}) => ({path: require(`../assets/images/${path}`), ...rest}))
 
 export default function Home() {
-    const promoContent = useRef(null)
     return (
         <div>
             <section className="video-container">

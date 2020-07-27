@@ -9,7 +9,6 @@ import ImageSelectorModal from '../components/common/image-selector-modal'
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 
-import featured from '../assets/mocks/featured'
 import {
     SAVE_POST_MUTATION,
     PUBLISH_POST_MUTATION,
@@ -23,8 +22,6 @@ import {
 
 const { Option } = Select;
 
-const images = featured.map(({image}) => image)
-
 const options = {
     placeholder: 'Begin typing your post...',
     theme: 'snow'
@@ -36,6 +33,8 @@ export default function PostCreator ({match, history}) {
     } = match
 
     const [user, setUser] = useAuthUser()
+
+    console.log('eventually block user by perms', {user, setUser})
 
     const quillEditor = useRef(null)
     const [editorEl, setEditorEl] = useState(null)
@@ -51,15 +50,12 @@ export default function PostCreator ({match, history}) {
         categories: [],
     })
 
-    const {data: blogImageLinks, bIerror, bIloading} = useQuery(LIST_IMAGES_QUERY)
-    const [savePost, {data: savedId}] = useMutation(SAVE_POST_MUTATION)
-    const [publishPost, {data: publishedId}] = useMutation(PUBLISH_POST_MUTATION)
-    const {data: catData, error, loading} = useQuery(GET_CATEGORIES_QUERY)
-    const {
-        data: postData,
-        error:postError,
-        loading: loadingPost
-    } = useQuery(GET_POST_QUERY, {
+    const {data: blogImageLinks} = useQuery(LIST_IMAGES_QUERY)
+    const [savePost] = useMutation(SAVE_POST_MUTATION)
+    const [publishPost] = useMutation(PUBLISH_POST_MUTATION)
+    const {data: catData} = useQuery(GET_CATEGORIES_QUERY)
+    
+    useQuery(GET_POST_QUERY, {
         variables: {id},
         onCompleted: ({post}) => {
             let newModel = {}
@@ -67,19 +63,21 @@ export default function PostCreator ({match, history}) {
             for (let id in modelData) {
                 newModel[id] = post[id]
             }
-            editorEl.setContents(JSON.parse(post.text))
+            if (post.text) {
+                editorEl.setContents(JSON.parse(post.text))
+            }
             setModelData(newModel)
         }
     })
 
-    const save = useCallback(async () => {
+    const save = useCallback(async () => { // eslint-disable-line
         let text = editorEl.getContents()
         let savedId = (await savePost({variables: { id, data: {...modelData, text: JSON.stringify(text) }}})).data.savePost
-        history.replace(`/edit-post/${savedId}`)
+        history.replace(`/view-post/${savedId}`)
 
-    }, [editorEl, modelData, savedId])
+    }, [editorEl, modelData, history, savePost, id])
 
-    const publish = useCallback(async () => {
+    const publish = useCallback(async () => { // eslint-disable-line
         let savedId
         if (!id) {
             let text = editorEl.getContents()
@@ -87,9 +85,10 @@ export default function PostCreator ({match, history}) {
         } else {
             savedId = id
         }
-        const pubsishedId = await publishPost({variables: {id: savedId}})
+        await publishPost({variables: {id: savedId}})
+        history.replace(`/view-post/${savedId}`)
 
-    }, [modelData, editorEl, id])
+    }, [modelData, editorEl, id, history, publishPost, savePost])
 
     const setModel = useCallback((key) => (ev) => {
         setModelData({
@@ -98,9 +97,9 @@ export default function PostCreator ({match, history}) {
         })
     }, [modelData])
 
-    useEffect(async () => {
+    useEffect(() => {
         setEditorEl(new Quill(quillEditor.current, options))
-    }, [])
+    }, []) // eslint-disable-line
 
     return (
         <section className="post-editor-container">
@@ -110,10 +109,11 @@ export default function PostCreator ({match, history}) {
                     <div>
                         <h6>Background image/video:</h6>
                         {
-                            modelData.bg_type === '2' &&
+                            modelData.bg_type === '2' ?
                                 <section className="iframe-container" onClick={() => setBackgroundImageModalOpen(true)} >
                                     {modelData.bg_src &&
                                         <iframe
+                                            title="background-video"
                                             width="100%"
                                             height="300px"
                                             src={modelData.bg_src}
@@ -127,13 +127,13 @@ export default function PostCreator ({match, history}) {
                                         </span>
                                     </div>
                                 </section>
-                            ||
+                            :
                             (
                                 <figure onClick={() => setBackgroundImageModalOpen(true)}>
                                     <img src={
-                                        modelData.bg_src
-                                        ? require(`../assets/images/${modelData.bg_src}`)
-                                        : `https://cdn5.vectorstock.com/i/thumb-large/99/94/default-avatar-placeholder-profile-icon-male-vector-23889994.jpg`}
+                                        modelData.bg_src ||
+                                            `https://cdn5.vectorstock.com/i/thumb-large/99/94/default-avatar-placeholder-profile-icon-male-vector-23889994.jpg`}
+                                        alt="post-background"
                                     />
                                     <div className="figure-overlay" >
                                         <span>Change Background <i className={`fal fa-camera`} /> / <i className={`fal fa-video`} />

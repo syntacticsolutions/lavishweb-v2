@@ -1,9 +1,9 @@
-import React, {useState, useMemo, useEffect} from 'react';
+    import React, {useState, useMemo, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {Pagination} from 'antd';
 import {TagRow} from './'
 
-export default function PostGrid ({posts}) {
+export default function PostGrid ({posts, onSelect}) {
     const [pageSize, setPageSize] = useState(9)
     const [current, setCurrent] = useState(1)
 
@@ -28,7 +28,7 @@ export default function PostGrid ({posts}) {
         <section className="grid-pagination-container">
             <section className="post-grid container">
                 {paginatedPosts.map((post, index) => {
-                    let image
+                    let image // eslint-disable-line
                     try {
                         image = require(`../../../assets/images/${post.image}`)
                     } catch (err) {
@@ -36,18 +36,18 @@ export default function PostGrid ({posts}) {
                     }
 
                     return (
-                        <div className="post-container">
+                        <div className="post-container" onClick={() => onSelect(post)}>
                             <figure>
-                                <Link to={post.link}>
+                                <a href>
                                     <img src={require(`../../../assets/images/${post.image}`)} alt={post.image}/>
-                                </Link>
+                                </a>
                             </figure>
                             <TagRow tags={post.categories} />
                             <h3>{post.title}</h3>
                             <p className="author-text">
                                 <span>
                                     By:
-                                    <Link to={`/authors/${post.author}`} >
+                                    <Link to={`/authors/${post.author_id}`} >
                                         {post.author}
                                     </Link>
                                 </span>
@@ -58,7 +58,7 @@ export default function PostGrid ({posts}) {
                             <p className="description-text">
                                 {post.description}
                             </p>
-                            <Link to={post.link}>Read More...</Link>
+                            <a href>Read More...</a>
                         </div>
                     )})}
             </section>

@@ -7,7 +7,7 @@ const catIds = [7]
 
 export default function Cloud () {
     
-    let {data, loading, error} = usePostsByCategoriesHook(catIds)
+    let {data} = usePostsByCategoriesHook(catIds)
 
     const goTo = useCallback(() => {
 

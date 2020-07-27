@@ -3,7 +3,6 @@ import {Input, Tabs} from 'antd'
 import {useMutation} from '@apollo/react-hooks'
 
 import {withLabel} from '../components/common/hoc'
-import {useAuthUser} from '../context/user-context'
 import Button from '../components/common/button'
 import firebase from 'firebase'
 
@@ -19,8 +18,8 @@ export default function Login () {
         repeatedPass: ''
     })
 
-    const [login, {data: loggedInId}] = useMutation(LOGIN_MUTATION)
-    const [signup, {data: newUserId}] = useMutation(SIGNUP_MUTATION)
+    const [login] = useMutation(LOGIN_MUTATION)
+    const [signup] = useMutation(SIGNUP_MUTATION)
 
     const setModel = useCallback((key) => ({target}) => {
         setData({
@@ -54,7 +53,7 @@ export default function Login () {
         } catch (err) {
             throw new Error(err)
         }
-    }, [data, activeKey]) 
+    }, [data, activeKey, login, signup]) 
 
     return (
         <section class="signin-container">

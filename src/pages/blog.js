@@ -1,9 +1,8 @@
 import React, {useMemo, useCallback} from 'react'
-import { useQuery } from '@apollo/react-hooks';
+import {useQuery} from '@apollo/react-hooks';
 import {BlogMain} from '../components/common/hoc'
-import gql from 'graphql-tag';
 
-import  {GET_BLOG_POSTS_QUERY} from '../queries/posts'
+import {GET_BLOG_POSTS_QUERY} from '../queries/posts'
 import {PostMasonry, MasonryPost, PostGrid} from '../components/common/post-masonry'
 
 const trendingConfig = {
@@ -43,7 +42,7 @@ const options = (type) => ({
 })
 
 export default function Blog ({history}) {
-    const {data: trendingData, error, loading} = useQuery(GET_BLOG_POSTS_QUERY, options('trending'))
+    const {data: trendingData} = useQuery(GET_BLOG_POSTS_QUERY, options('trending'))
     const {data: featuredData} = useQuery(GET_BLOG_POSTS_QUERY, options('featured'))
     const {data: homeData} = useQuery(GET_BLOG_POSTS_QUERY, options('default'))
 
@@ -51,10 +50,9 @@ export default function Blog ({history}) {
     const featured = useMemo(() => mergeStyles(featuredData?.posts, featuredConfig), [featuredData])
     const lastPost = useMemo(() => featured?.pop(), [featured])
 
-    const goTo = useCallback(() => {
-
-    }, [])
-    
+    const goTo = useCallback((obj) => {
+        history.push(`/view-post/${obj.id}`)
+    }, [history])
 
     return (
         <BlogMain>

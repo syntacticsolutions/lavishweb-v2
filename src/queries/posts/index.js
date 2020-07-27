@@ -34,6 +34,10 @@ export const GET_POST_QUERY = gql`
             comments {
                 id
                 comment
+                author
+                author_image
+                author_id
+                created_at
             }
             likes
             categories

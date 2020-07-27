@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import Button from '../common/button';
 import Toggle from '../common/toggle';
 
 export default function MenuBar({navLinks, lightMode, onSetLightMode}) {

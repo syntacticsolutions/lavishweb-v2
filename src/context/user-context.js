@@ -1,7 +1,7 @@
 import React, {useState, createContext, useEffect} from 'react'
 import firebase from 'firebase'
 
-var app = firebase.initializeApp({
+firebase.initializeApp({
     apiKey: "AIzaSyCxXQkfPukVNIJi9f8Nip39CMgAE6LlBF4",
     authDomain: "backend.lavishweb.com",
     projectId: "lavishweb-94938",
