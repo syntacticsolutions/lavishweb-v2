@@ -34,7 +34,7 @@ export default function PostViewer ({match, history}) {
         onCompleted: ({post}) => {
             if (!slug) {
                 // for SEO 
-                history.replace(
+                return history.replace(
                     `/view-post/${id}/${
                         post.title
                             .toLowerCase()
