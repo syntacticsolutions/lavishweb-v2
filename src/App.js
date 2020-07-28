@@ -3,9 +3,9 @@ import MenuBar from './components/menu-bar'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import {WindowScrollProvider} from './context/scroll-context';
-import {withAuthUser} from './context/user-context'
 import PostCreator from './pages/post-creator'
 import PostViewer from './pages/post-viewer'
+import UserAdmin from './pages/user-admin'
 import Footer from './components/common/footer'
 
 const navLinks = [
@@ -38,7 +38,7 @@ const navLinks = [
 function App() {
   const [lightMode, setLightMode] = useState(true)
 
-  return withAuthUser(
+  return (
     <div className={`App ${lightMode ? 'light' : 'dark'}`}>
       <WindowScrollProvider>
         <Router>
@@ -53,6 +53,7 @@ function App() {
             <Route exact path="/edit-post/:id" component={PostCreator} />
             <Route path='/view-post/:id' component={PostViewer} />
             <Route path='/view-post/:id/:slug' component={PostViewer} />
+            <Route path='/user-admin' component={UserAdmin} />
           </Switch>
         </Router>
         <Footer pages={pages} />

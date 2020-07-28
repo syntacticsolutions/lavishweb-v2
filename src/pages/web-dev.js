@@ -5,12 +5,12 @@ import {BlogMain} from '../components/common/hoc'
 
 const catIds = [1,2,3,4,5,9]
 
-export default function WebDev () {
+export default function WebDev ({history}) {
     let {data} = usePostsByCategoriesHook(catIds)
 
-    const goTo = useCallback(() => {
-
-    }, [])
+    const goTo = useCallback((obj) => {
+        history.push(`/view-post/${obj.id}`)
+    }, [history])
 
     return (
         <BlogMain>

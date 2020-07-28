@@ -13,7 +13,13 @@ export default function LeadershipRow({ images }) {
                                     <div className="hover_inner text-center">
                                         <ul>
                                             {image.profiles.map((profile) => (
-                                                <li><a href={profile.path}> <i className={`fa fa-${profile.type}`}></i> </a></li>
+                                                <li>
+                                                    <a href={profile.path}>
+                                                        <i
+                                                            className={`fa fa-${profile.type}`}
+                                                        />
+                                                    </a>
+                                                </li>
                                             ))}
                                         </ul>
                                     </div>

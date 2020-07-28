@@ -10,6 +10,7 @@ import './assets/scss/base.scss'
 import '@fortawesome/fontawesome-pro/css/all.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'quill/dist/quill.snow.css'
+import {withAuthUser} from './context/user-context'
 
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
@@ -43,7 +44,7 @@ export const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      { withAuthUser(<App />) }
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')

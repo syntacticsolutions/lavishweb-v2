@@ -21,7 +21,13 @@ export default function Comment ({comment}) {
                 </figure>
                 <div className="comment-author-meta">
                     <h5>{comment.author}</h5>
-                    <h6>{moment(comment?.created_at || new Date().getTime()).fromNow()}</h6>
+                    <h6>{
+                        moment(
+                            new Date(
+                                parseInt(comment?.created_at)
+                            ).toLocaleDateString()
+                        ).fromNow()
+                    }</h6>
                 </div>
             </div>
             <p>

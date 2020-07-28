@@ -5,12 +5,12 @@ import {BlogMain} from '../components/common/hoc'
 
 const catIds = [6]
 
-export default function BrainHacking () {
+export default function BrainHacking ({history}) {
     let {data} = usePostsByCategoriesHook(catIds)
 
-    const goTo = useCallback(() => {
-
-    }, [])
+    const goTo = useCallback((obj) => {
+        history.push(`/view-post/${obj.id}`)
+    }, [history])
 
     return (
         <BlogMain>

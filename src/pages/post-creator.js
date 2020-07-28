@@ -72,7 +72,20 @@ export default function PostCreator ({match, history}) {
 
     const save = useCallback(async () => { // eslint-disable-line
         let text = editorEl.getContents()
-        let savedId = (await savePost({variables: { id, data: {...modelData, text: JSON.stringify(text) }}})).data.savePost
+
+        let savedId = (
+            await savePost(
+                {variables:{
+                    id,
+                    data: {
+                        ...modelData,
+                        text: JSON.stringify(text)
+                    }
+                }}
+            )
+        ).data
+            .savePost
+
         history.replace(`/view-post/${savedId}`)
 
     }, [editorEl, modelData, history, savePost, id])
@@ -81,11 +94,24 @@ export default function PostCreator ({match, history}) {
         let savedId
         if (!id) {
             let text = editorEl.getContents()
-            savedId = (await savePost({variables: { id, data: {...modelData, text: JSON.stringify(text) }}})).data.savePost
+
+            savedId = (
+                await savePost(
+                    {variables: {
+                        id,
+                        data: {
+                            ...modelData,
+                            text: JSON.stringify(text) 
+                        }
+                    }}
+                )
+            ).data.savePost
         } else {
             savedId = id
         }
+
         await publishPost({variables: {id: savedId}})
+        
         history.replace(`/view-post/${savedId}`)
 
     }, [modelData, editorEl, id, history, publishPost, savePost])

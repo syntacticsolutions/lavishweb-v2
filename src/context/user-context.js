@@ -1,8 +1,10 @@
 import React, {useState, createContext, useEffect} from 'react'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import firebaseKey from './key'
 
 firebase.initializeApp({
-    apiKey: "AIzaSyCxXQkfPukVNIJi9f8Nip39CMgAE6LlBF4",
+    apiKey: firebaseKey,
     authDomain: "backend.lavishweb.com",
     projectId: "lavishweb-94938",
     storageBucket: "lavishweb-94938.appspot.com",
