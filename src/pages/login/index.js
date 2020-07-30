@@ -87,7 +87,7 @@ export default function Login ({history}) {
                     }
                 </Tabs>
                 <p
-                    class="text-primary
+                    className="text-primary
                     forgot-pwd"
                     onClick={() => setActiveKey('3')}
                 >

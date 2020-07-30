@@ -75,3 +75,9 @@ export const GET_BLOG_POSTS_BY_CATEGORY_QUERY = gql`
         }
     }
 `
+
+export const POST_COMMENT_MUTATION = gql`
+    mutation PostCommentMutation ($text: String, $id: ID) {
+        response: postComment (text: $text, id: $id)
+    }
+`

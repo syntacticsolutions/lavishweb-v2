@@ -1,12 +1,12 @@
 import React, {useRef, useState, useEffect, useCallback} from 'react'
-import {useQuery} from '@apollo/react-hooks'
+import {useQuery, useMutation} from '@apollo/react-hooks'
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 import {Input} from 'antd'
 
 import Comment from '../components/common/comment'
 import Button from '../components/common/button'
-import {GET_POST_QUERY} from '../queries/posts'
+import {GET_POST_QUERY, POST_COMMENT_MUTATION} from '../queries/posts'
 
 const {TextArea} = Input;
 const options = {
@@ -27,8 +27,13 @@ export default function PostViewer ({match, history}) {
         setEditorEl(new Quill(quillEditor.current, options))
     }, [])
 
+    const [createComment] = useMutation(POST_COMMENT_MUTATION, {
+        variables: {id, text: commentTxt}
+    })
+
     const {
         data,
+        refetch
     } = useQuery(GET_POST_QUERY, {
         variables: {id},
         onCompleted: ({post}) => {
@@ -50,8 +55,16 @@ export default function PostViewer ({match, history}) {
     })
 
     const postComment = useCallback(() => {
-        console.log(commentTxt)
-    }, [commentTxt])
+        createComment()
+            .catch(err => {
+                console.log(err.message)
+                if (err.message.includes('Forbidden')) {
+                    history.push('/login')
+                    // TODO add toasters
+                }
+                // TODO add toasters
+            })
+    }, [createComment, history])
 
     return (
         <article className="post-viewer-container">
@@ -120,7 +133,14 @@ export default function PostViewer ({match, history}) {
                         rows={4}
                         onChange={({target}) => setCommentTxt(target.value)}
                     />
-                    <Button type="secondary" onClick={postComment}>Send</Button>
+                    <Button
+                        type="secondary"
+                        onClick={async () => {
+                            await postComment()
+                            refetch()
+                        }}>
+                            Send
+                    </Button>
                 </div>
             </section>
         </article>
