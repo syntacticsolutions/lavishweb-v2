@@ -14,9 +14,11 @@
     "apollo-client": "^2.6.10",
     "apollo-link-http": "^1.5.17",
     "bootstrap": "4.4.1",
+    "elliptic": "^6.5.3",
     "firebase": "^7.17.0",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.10.4",
+    "lodash": "^4.17.19",
     "moment": "^2.27.0",
     "node-sass": "^4.13.1",
     "quill": "^1.3.7",
@@ -26,7 +28,8 @@
     "react-router": "^5.1.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "^8.0.2",
+    "websocket-extensions": "^0.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
