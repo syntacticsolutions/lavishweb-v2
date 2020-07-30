@@ -38,7 +38,6 @@ export default function PostViewer ({match, history}) {
         variables: {id},
         onCompleted: ({post}) => {
             if (!slug) {
-                // for SEO 
                 return history.replace(
                     `/view-post/${id}/${
                         post.title
@@ -68,7 +67,6 @@ export default function PostViewer ({match, history}) {
 
     return (
         <article className="post-viewer-container">
-
             <div className="post-title-container">
                 <h1>{data?.post?.title}</h1>
                 <p className="flex flex-column">
