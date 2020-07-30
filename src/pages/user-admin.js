@@ -3,9 +3,16 @@ import {useQuery} from '@apollo/react-hooks'
 import { Table } from 'antd';
 
 import {LIST_USER_QUERY} from '../queries/user'
+import {usePermsEffect} from '../utils'
+import {useAuthUser} from '../context/user-context'
 
-export default function UserAdmin () {
+export default function UserAdmin ({history}) {
     const {data} = useQuery(LIST_USER_QUERY)
+    const [user] = useAuthUser()
+
+    usePermsEffect('admin', [user], () => {
+        history.push(`/blog`)
+    })
 
     return (
         <div className="admin-page">

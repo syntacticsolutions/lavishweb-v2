@@ -9,6 +9,8 @@ import ImageSelectorModal from '../components/common/image-selector-modal'
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 
+import {usePermsEffect} from '../utils'
+
 import {
     SAVE_POST_MUTATION,
     PUBLISH_POST_MUTATION,
@@ -17,7 +19,7 @@ import {
 } from '../queries/posts'
 
 import {
-    LIST_IMAGES_QUERY
+    LIST_IMAGES_QUERY, UPLOAD_IMAGE_MUTATION
 } from '../queries/images'
 
 const { Option } = Select;
@@ -32,14 +34,17 @@ export default function PostCreator ({match, history}) {
         params: {id}
     } = match
 
-    const [user, setUser] = useAuthUser()
+    const [user] = useAuthUser()
 
-    console.log('eventually block user by perms', {user, setUser})
-
+    usePermsEffect('post', [user], () => {
+        history.push(`/view-post/${id}`)
+    })
+    
     const quillEditor = useRef(null)
     const [editorEl, setEditorEl] = useState(null)
     const [imageModalOpen, setImageModalOpen] = useState(false)
     const [backgroundImageModalOpen, setBackgroundImageModalOpen] = useState(false)
+    const [imageInput, setImageInput] = useState(null)
     const [modelData, setModelData] = useState({
         description: '',
         title: '',
@@ -50,10 +55,11 @@ export default function PostCreator ({match, history}) {
         categories: [],
     })
 
-    const {data: blogImageLinks} = useQuery(LIST_IMAGES_QUERY)
+    const {data: blogImageLinks, refetch} = useQuery(LIST_IMAGES_QUERY)
+    const {data: catData} = useQuery(GET_CATEGORIES_QUERY)
     const [savePost] = useMutation(SAVE_POST_MUTATION)
     const [publishPost] = useMutation(PUBLISH_POST_MUTATION)
-    const {data: catData} = useQuery(GET_CATEGORIES_QUERY)
+    const [uploadImage] = useMutation(UPLOAD_IMAGE_MUTATION)
     
     useQuery(GET_POST_QUERY, {
         variables: {id},
@@ -123,8 +129,29 @@ export default function PostCreator ({match, history}) {
         })
     }, [modelData])
 
+    const toBase64 = useCallback(file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    }), []);
+
+    const findImage = useCallback((image) => {
+        imageInput.click()
+    }, [imageInput])
+
     useEffect(() => {
         setEditorEl(new Quill(quillEditor.current, options))
+        let imgInput = document.createElement('input')
+        imgInput.type = 'file'
+        imgInput.accept = 'image/*'
+        imgInput.onchange = async (e) => {
+            const image = await toBase64(e.target.files[0])
+            uploadImage({variables: {image}})
+                .catch(console.log)
+            refetch()
+        }
+        setImageInput(imgInput)
     }, []) // eslint-disable-line
 
     return (
@@ -180,6 +207,7 @@ export default function PostCreator ({match, history}) {
                             onSelectTab={(bg_type) => {
                                 setModelData({...modelData, bg_type})
                             }}
+                            onUploadImage={findImage}
                         />
                     )} 
                 </div>
@@ -233,7 +261,7 @@ export default function PostCreator ({match, history}) {
                                 {
                                     catData.categories.map(({label, id}) => (
 
-                                        <Option value={id} label={label}>
+                                        <Option value={id} label={label} key={id}>
                                             <div className="demo-option-label-item">
                                                 {label}
                                             </div>
@@ -253,6 +281,7 @@ export default function PostCreator ({match, history}) {
                                 setModelData({ ...modelData, image })
                                 setImageModalOpen(false)
                             }}
+                            onUploadImage={findImage}
                         />
                     )}
                 </div>

@@ -7,3 +7,9 @@ export const LIST_IMAGES_QUERY = gql`
         }
     }
 `;
+
+export const UPLOAD_IMAGE_MUTATION = gql`
+    mutation UploadImage($image: String) {
+        uploadImage(image: $image)
+    }
+`

@@ -23,8 +23,9 @@ function AuthUserProvider ({children}) {
             .onAuthStateChanged((user) => {
                 if (user) {
                     setUser(user)
-                    user.getIdToken().then(function (accessToken) {
-                        localStorage.setItem('token', `Bearer ${accessToken}`)
+                    user.getIdTokenResult(true).then(function ({token}) {
+
+                        localStorage.setItem('token', `Bearer ${token}`)
                         // TODO get Perms
                     })
                 }

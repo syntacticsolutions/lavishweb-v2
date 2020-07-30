@@ -4,7 +4,7 @@ import Button from '../button'
 
 const { TabPane } = Tabs;
 
-export default function ImageSelectorModal({ images, onSelectImage, onSelectTab, showTabs }) {
+export default function ImageSelectorModal({ images, onSelectImage, onSelectTab, showTabs, onUploadImage }) {
     const [tab, setTab] = useState('1')
     const [link, setLink] = useState('')
     return (
@@ -15,6 +15,7 @@ export default function ImageSelectorModal({ images, onSelectImage, onSelectTab,
                     <Button
                         type="flashy"
                         rounded
+                        onClick={onUploadImage}
                     >
                         <span>
                             Upload Image <i className={`fal fa-camera`} />

@@ -42,8 +42,10 @@
 
     .image-selector-images {
         display: flex;
+        flex-wrap: wrap;
         margin-left: 20px;
         margin-top: 50px;
+        overflow: scroll;
 
         figure {
             margin-right: 30px;
