@@ -51,8 +51,8 @@ export default function Blog ({history}) {
     const lastPost = useMemo(() => featured?.pop(), [featured])
 
     const goTo = useCallback((obj) => {
-        history.push(`/view-post/${obj.id}`)
-    }, [history])
+        window.location.href = `/view-post/${obj.id}`
+    }, [])
 
     return (
         <BlogMain>

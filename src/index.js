@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
@@ -17,6 +16,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloLink, concat } from '@apollo/client'
+
+import { hydrate, render } from "react-dom";
 
 const cache = new InMemoryCache();
 const httpLink = new HttpLink({
@@ -41,14 +42,21 @@ export const client = new ApolloClient({
   link: concat(authMiddleware, httpLink),
 });
 
-ReactDOM.render(
+const app = (
   <React.StrictMode>
     <ApolloProvider client={client}>
       { withAuthUser(<App />) }
     </ApolloProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+  </React.StrictMode>
+)
+
+let root = document.getElementById('root')
+
+if (root?.hasChildNodes()) {
+  hydrate(app, root);
+} else {
+  render(app, root);
+}
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

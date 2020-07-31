@@ -14,7 +14,7 @@ export default function MasonryPost ({post, tagsOnTop, onSelect}) {
     const style = windowWidth > 900 ? {...imageBackground, ...post.style} : imageBackground
 
     return (
-        <a className="masonry-post overlay" style={style} href={post.link} onClick={() => onSelect(post)}>
+        <a className="masonry-post overlay" style={style} href={`/view-post/${post.id}/${post.title.toLowerCase().split(' ').join('_')}`}>
             <div className="image-text" style={{justifyContent: tagsOnTop ? 'space-between' : 'flex-end'}}>
                 <TagRow tags={post.categories} />
                 <div>

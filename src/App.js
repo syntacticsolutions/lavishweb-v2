@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import MenuBar from './components/menu-bar'
+import Helmet from 'react-helmet'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import {WindowScrollProvider} from './context/scroll-context';
@@ -41,6 +42,16 @@ function App() {
   return (
     <div className={`App ${lightMode ? 'light' : 'dark'}`}>
       <WindowScrollProvider>
+        <Helmet>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#000000" />
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+          <meta
+            name="description"
+            content="Lavish Web Tech Blog - Learn how to make the most extravegant websites, and build with some of the most cutting-edge technologies in the industry."
+          />
+          <meta property="og:site_name" content="Lavish Web" />
+        </Helmet>
         <Router>
           <MenuBar
             onSetLightMode={setLightMode}

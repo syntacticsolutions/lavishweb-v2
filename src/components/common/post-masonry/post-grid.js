@@ -22,8 +22,6 @@ export default function PostGrid ({posts, onSelect}) {
         })
     }, [current, pageSize])
 
-
-
     return (
         <section className="grid-pagination-container">
             <section className="post-grid container">
@@ -38,9 +36,9 @@ export default function PostGrid ({posts, onSelect}) {
                     return (
                         <div className="post-container" onClick={() => onSelect(post)}>
                             <figure>
-                                <a href>
+                                <Link to={`/view-post/${post.id}/${post.title.toLowerCase().split(' ').join('_')}`}>
                                     <img src={require(`../../../assets/images/${post.image}`)} alt={post.image}/>
-                                </a>
+                                </Link>
                             </figure>
                             <TagRow tags={post.categories} />
                             <h3>{post.title}</h3>
@@ -58,7 +56,9 @@ export default function PostGrid ({posts, onSelect}) {
                             <p className="description-text">
                                 {post.description}
                             </p>
-                            <a href>Read More...</a>
+                            <Link to={`/view-post/${post.id}/${post.title.toLowerCase().split(' ').join('_')}`}>
+                                Read More...
+                            </Link>
                         </div>
                     )})}
             </section>

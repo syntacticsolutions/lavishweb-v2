@@ -1,7 +1,8 @@
 import React from 'react';
 import MasonryPost from './masonry-post';
 
-export default function PostMasonry ({posts,
+export default function PostMasonry ({
+    posts,
     columns,
     tagsOnTop,
     onSelect
@@ -15,7 +16,7 @@ export default function PostMasonry ({posts,
                 post,
                 index,
                 tagsOnTop,
-                key:index,
+                key: index,
                 onSelect
             }}/>    
         )}

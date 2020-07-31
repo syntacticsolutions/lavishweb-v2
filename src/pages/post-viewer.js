@@ -8,6 +8,8 @@ import Comment from '../components/common/comment'
 import Button from '../components/common/button'
 import {GET_POST_QUERY, POST_COMMENT_MUTATION} from '../queries/posts'
 
+import Helmet from 'react-helmet'
+
 const {TextArea} = Input;
 const options = {
     placeholder: 'Begin typing your post...',
@@ -67,6 +69,15 @@ export default function PostViewer ({match, history}) {
 
     return (
         <article className="post-viewer-container">
+            <Helmet>
+                <title>{data?.post?.title}</title>
+                <meta property="og:image" content={data?.post?.image} />
+                <meta property="og:title" content={data?.post?.title} />
+                <meta property="og:url" content={match.url} />
+                <meta property="og:site_name" content={'Lavish Web'} />
+                <meta property="og:type" content="article" />
+                <meta name="description" content={data?.post?.description} />
+            </Helmet>
             <div className="post-title-container">
                 <h1>{data?.post?.title}</h1>
                 <p className="flex flex-column">
