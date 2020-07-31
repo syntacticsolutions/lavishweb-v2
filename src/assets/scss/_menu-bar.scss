@@ -11,6 +11,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0px 5%;
     z-index: 2;
     box-shadow: 2px 2px 7px #333;
 
@@ -26,6 +27,7 @@
     }
 
     ul {
+        margin: 0px 50px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -47,12 +49,15 @@
 
 @media screen and (max-width: 1000px) {
     .lavish-menu-bar {
+        display: flex;
+        justify-content: space-between;
+
         ul {
             background-color: #333;
             width: 300px;
             height: 100vh;
             position: fixed;
-            left: -300px;
+            left: -350px;
             top: 60px;
             flex-direction: column;
             justify-content: flex-start;
@@ -72,7 +77,7 @@
             }
 
             &.active {
-                left: 0px;
+                left: -50px;
             }
         }
 

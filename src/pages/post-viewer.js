@@ -18,7 +18,7 @@ const options = {
 
 export default function PostViewer ({match, history}) {
     const {
-        params: {id, slug}
+        params: {id}
     } = match
 
     const quillEditor = useRef(null)
@@ -39,16 +39,6 @@ export default function PostViewer ({match, history}) {
     } = useQuery(GET_POST_QUERY, {
         variables: {id},
         onCompleted: ({post}) => {
-            if (!slug) {
-                return history.replace(
-                    `/view-post/${id}/${
-                        post.title
-                            .toLowerCase()
-                            .split(' ')
-                            .join('_')
-                    }`
-                )
-            }
             if (post.text) {
                 editorEl.setContents(JSON.parse(post.text))
             }
@@ -74,7 +64,6 @@ export default function PostViewer ({match, history}) {
                 <meta property="og:image" content={data?.post?.image} />
                 <meta property="og:title" content={data?.post?.title} />
                 <meta property="og:url" content={match.url} />
-                <meta property="og:site_name" content={'Lavish Web'} />
                 <meta property="og:type" content="article" />
                 <meta name="description" content={data?.post?.description} />
             </Helmet>
@@ -123,7 +112,6 @@ export default function PostViewer ({match, history}) {
                 }
             </section>
             <section className="post-content-container">
-                <h1>{data?.post?.title}</h1>
                 <div ref={quillEditor} />
             </section>
             <section className="post-comments-container">
@@ -136,7 +124,9 @@ export default function PostViewer ({match, history}) {
                 }
                 <h4>Leave a comment</h4>
                 <div className="post-comments-inputs">
+                    <label for="comment-txt">Leave a comment</label>
                     <TextArea
+                        id="comment-txt"
                         value={commentTxt}
                         placeholder="Leave a comment..."
                         rows={4}
