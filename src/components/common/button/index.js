@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Button ({children, type, rounded, onClick, hoverClass}) {
+export default function Button ({children, type, rounded, onClick, hoverClass, htmlType}) {
 
 
     return (
@@ -20,6 +20,7 @@ export default function Button ({children, type, rounded, onClick, hoverClass}) 
                     target.classList.remove(hoverClass)
             }
             onClick={onClick}
+            type={htmlType}
         >
             {children}
         </button>

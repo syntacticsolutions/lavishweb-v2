@@ -40,7 +40,8 @@ export default function PostViewer ({match, history}) {
         variables: {id},
         onCompleted: ({post}) => {
             if (post.text) {
-                editorEl.setContents(JSON.parse(post.text))
+                const delta = JSON.parse(post.text)
+                editorEl.setContents(delta)
             }
         }
     })
@@ -124,9 +125,8 @@ export default function PostViewer ({match, history}) {
                 }
                 <h4>Leave a comment</h4>
                 <div className="post-comments-inputs">
-                    <label for="comment-txt">Leave a comment</label>
+                    <label>Leave a comment</label>
                     <TextArea
-                        id="comment-txt"
                         value={commentTxt}
                         placeholder="Leave a comment..."
                         rows={4}

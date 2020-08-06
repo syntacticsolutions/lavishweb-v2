@@ -1,10 +1,10 @@
 import React, {useState, useCallback} from 'react'
-import {Input, Tabs} from 'antd'
+import {Input, Tabs, Form} from 'antd'
 import {useMutation} from '@apollo/react-hooks'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import {message} from 'antd'
 
-import {withLabel} from '../../components/common/hoc'
 import Button from '../../components/common/button'
 
 import {LOGIN_MUTATION, SIGNUP_MUTATION} from '../../queries/user'
@@ -42,7 +42,6 @@ export default function Login ({history}) {
 
                 await firebase.auth().currentUser.getIdToken(true)
                 
-                console.log(firebase.auth().currentUser)
                 return user
             },
             '2': async () => {
@@ -60,47 +59,119 @@ export default function Login ({history}) {
 
         let user = await action()
             .catch(err => {
-                //TODO add toaster messages
-                console.error(err)
+                message.error(err.message)
             })
         
         if (user) {
             history.push('/blog');
         }
-    }, [data, activeKey, login, signup, history]) 
+    }, [data, activeKey, login, signup, history])
+
+    const email = (
+        <Form.Item
+            label="Email"
+            name="email"
+            rules={[
+                {
+                  type: 'email',
+                  message: 'Please provide a valid email',
+                },
+                {
+                  required: true,
+                  message: 'Email is required',
+                },
+            ]}
+        >
+            <Input type="email" onChange={setModel('email')}/>
+        </Form.Item>
+    )
+
+    const password = (
+        <Form.Item
+            label="Password"
+            name="password"
+            rules={[
+            {
+                required: true,
+                message: 'Please enter a password!',
+            },
+            ({ getFieldValue }) => ({
+                validator(rule, value) {
+                  if (!value || value.length > 7) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject('Password must be at least 8 characters long.');
+                },
+              }),
+            ]}
+        >
+            <Input type="password" onChange={setModel('password')}/>
+        </Form.Item>
+    )
+
+    const confirmPwd = (
+        <Form.Item
+            label="Confirm Password"
+            name="confirm-password"
+            rules={[
+              {
+                required: true,
+                message: 'Please confirm your password!',
+              },
+              ({ getFieldValue }) => ({
+                validator(rule, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject('Passwords must match!');
+                },
+              }),
+            ]}
+        >
+            <Input type="password" onChange={setModel('repeatedPass')}/>
+        </Form.Item>
+    )
 
     return (
         <section className="signin-container">
-            <div className="form-container">            
-                <Tabs activeKey={activeKey} onChange={setActiveKey}>
-                    <TabPane tab="Login" key="1">
-                        {withLabel(<Input type="text" onChange={setModel('email')}/>, 'Email')}
-                        {withLabel(<Input type="password" onChange={setModel('password')}/>, 'Password')}
-                    </TabPane>
-                    <TabPane tab="Signup" key="2">
-                        {withLabel(<Input type="text" onChange={setModel('email')}/>, 'Email')}
-                        {withLabel(<Input type="password" onChange={setModel('password')}/>, 'Password')}
-                        {withLabel(<Input type="password" onChange={setModel('repeatedPass')}/>, 'Confirm Password')}
-                    </TabPane>
-                    {
-                        activeKey === '3' && withLabel(<Input type="text" onChange={setModel('email')} />, 'Email')
-                    }
-                </Tabs>
-                <p
-                    className="text-primary
-                    forgot-pwd"
-                    onClick={() => setActiveKey('3')}
-                >
-                    Forgot your password?
-                </p>
-                <Button type="flashy" onClick={onSubmit}>
-                    { activeKey === '1' 
-                        ? 'Login'
-                        : activeKey === '2'
-                        ? 'Sign up'
-                        : 'Request Password Reset'}
-                </Button>
-            </div>
+            <Form
+                name="basic"
+                initialValues={{
+                    remember: true,
+                }}
+                layout="vertical"
+            >  
+                <div className="form-container">      
+                    <Tabs activeKey={activeKey} onChange={setActiveKey}>
+                        <TabPane tab="Login" key="1">
+                            {email}
+                            {password}
+                        </TabPane>
+                        <TabPane tab="Signup" key="2">
+                            {email}
+                            {password}
+                            {confirmPwd}
+                        </TabPane>
+                        {
+                            activeKey === '3' && email
+                        }
+                    </Tabs>
+                    <p
+                        className="text-primary
+                        forgot-pwd"
+                        onClick={() => setActiveKey('3')}
+                    >
+                        Forgot your password?
+                    </p>
+                    <Button type="flashy" htmlType="submit" onClick={onSubmit}>
+                        { activeKey === '1' 
+                            ? 'Login'
+                            : activeKey === '2'
+                            ? 'Sign up'
+                            : 'Request Password Reset'}
+                    </Button>
+                </div>
+            </Form>
         </section>
     )
 }
