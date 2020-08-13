@@ -1,6 +1,5 @@
 import React, {useRef} from 'react'
-import Button from '../common/button'
-import Animated from '../common/animated'
+import Button from '../../components/common/button'
 
 const pricingConfig = [
     {
@@ -10,13 +9,13 @@ const pricingConfig = [
     },
     {
         title: 'Weekly Training',
-        price: '$300 / 1 week',
+        price: '$125 / 1 week',
         options: ['Design advice', 'Architecture advice', 'Planning advice', '3 hours per week', 'Pair Coding Sessions', 'Free LinkedIn recommendation', 'Some restrictions apply']
     },
     {
         title: 'Intensive Training',
-        price: '$5000 / 3 months',
-        options: ['Apple & Uber Veteran training', 'Professional advice', '4 hours per week', 'Pair Coding Sessions', 'Full stack intensive training', 'Free LinkedIn recommendation']
+        price: '$1500 / 3 months',
+        options: ['Professional advice', '3 hours per week', 'Pair Coding Sessions', 'Fullstack intensive training', 'Free LinkedIn recommendation']
     }
 ]
 
@@ -28,7 +27,6 @@ export default function Pricing() {
             <div className="row" ref={container} >
                 {pricingConfig.map((obj, index) => (
                     <div key={index} className="col-lg-4 col-md-6 pricing-card">
-                        <Animated type="flipInY" delay={index} targetRef={container}  padding={300}>
                             <div className="single-pricing text-center">
                                 <div className="pricing-header">
                                     <h3>{obj.title}</h3>
@@ -46,7 +44,6 @@ export default function Pricing() {
                                     <Button type="flashy" rounded>Join Now</Button>
                                 </div>
                             </div>
-                        </Animated>
                     </div>
                 ))}
             </div>

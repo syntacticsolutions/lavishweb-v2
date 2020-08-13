@@ -7,6 +7,7 @@ import {WindowScrollProvider} from './context/scroll-context';
 import PostCreator from './pages/post-creator'
 import PostViewer from './pages/post-viewer'
 import UserAdmin from './pages/user-admin'
+import Pricing from './pages/pricing'
 import Footer from './components/common/footer'
 import Home from './pages/home'
 
@@ -23,10 +24,10 @@ const navLinks = [
     title: 'Cloud',
     path: '/cloud'
   },
-  {
-    title: 'Algorithms',
-    path: '/algorithms'
-  },
+  // {
+  //   title: 'Algorithms',
+  //   path: '/algorithms'
+  // },
   {
     title: 'Brain Hacking',
     path: '/health'
@@ -61,6 +62,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             {navLinks.map(getComponent)}
+            <Route exact path="/pricing" component={Pricing} />
             <Route exact path="/edit-post" component={PostCreator} />
             <Route exact path="/edit-post/:id" component={PostCreator} />
             <Route path='/view-post/:id' component={PostViewer} />

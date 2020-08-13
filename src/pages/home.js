@@ -16,11 +16,13 @@ const images = [
   const imageTexts = [
     {
       title: 'Web Development Courses',
-      text: 'Learn how to build complex web projects like the pros with weekly mentorship and intensive project building jams.'
+      text: 'Learn how to build complex web projects like the pros with weekly mentorship and intensive project building jams.',
+      href: '/pricing'
     },
     {
       title: 'Coding Blog',
-      text: 'Check out some videos and blog posts from all kinds of tech creators with various backgrounds.'
+      text: 'Check out some videos and blog posts from all kinds of tech creators with various backgrounds.',
+      href: '/blog'
     }
   ]
   
