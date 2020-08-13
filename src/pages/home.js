@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef, useEffect} from 'react'
 import DualImageLink from '../components/common/dual-image-link';
 import Header from '../components/common/header'
 import IconRow from '../components/common/icon-row'
@@ -34,10 +34,16 @@ const images = [
   ].map(({path, ...rest}) => ({path: require(`../assets/images/${path}`), ...rest}))
 
 export default function Home() {
+    const video = useRef(null)
+
+    useEffect(() => {
+      video.current.play()
+    }, [])
+
     return (
         <div>
             <section className="video-container">
-                <video className="intro-video" autoPlay muted>
+                <video ref={video} className="intro-video" muted>
                     <source src={introVideo} type="video/mp4" />
 
                 Sorry, your browser doesn't support embedded videos.

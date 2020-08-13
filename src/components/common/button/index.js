@@ -2,7 +2,6 @@ import React from 'react'
 
 export default function Button ({children, type, rounded, onClick, hoverClass, htmlType}) {
 
-
     return (
         <button
             className={`lavish-btn ${

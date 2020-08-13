@@ -8,6 +8,7 @@ import PostCreator from './pages/post-creator'
 import PostViewer from './pages/post-viewer'
 import UserAdmin from './pages/user-admin'
 import Footer from './components/common/footer'
+import Home from './pages/home'
 
 const navLinks = [
   {
@@ -58,7 +59,7 @@ function App() {
             {...{lightMode, navLinks}}
           />
           <Switch>
-            <Route exact path="/" component={() => React.createElement(require('./pages/home').default)} />
+            <Route exact path="/" component={Home} />
             {navLinks.map(getComponent)}
             <Route exact path="/edit-post" component={PostCreator} />
             <Route exact path="/edit-post/:id" component={PostCreator} />
