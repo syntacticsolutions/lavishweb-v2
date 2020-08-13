@@ -1,6 +1,5 @@
 .signin-container {
     background: linear-gradient(173deg, transparent, rgba(90, 200, 250, .1), transparent, rgba(64, 156, 255, 0.1), transparent);
-    height: 100vh;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -16,10 +15,10 @@
     .form-container {
         border: 1px solid $border;
         background: white;
-        max-width: 700px;
+        max-width: 600px;
         width: 90%;
         position: absolute;
-        bottom: calc((100vh - 500px) / 4);
+        bottom: 40%;
         min-height: 400px;
         border-radius: 4px;
         padding: 60px 80px 100px;
@@ -49,5 +48,12 @@
             width: 70%;
             margin: 30px auto;
         }
+    }
+}
+
+
+@media screen and (max-width: 900px) {
+    .signin-container .form-container {
+        padding: 10% 7%;
     }
 }
