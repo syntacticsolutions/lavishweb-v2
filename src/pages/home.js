@@ -39,17 +39,18 @@ export default function Home() {
     const video = useRef(null)
 
     useEffect(() => {
-      video.current.play()
+      video.current.innerHTML = `
+        <video  className="intro-video" muted autoplay>
+          <source src="${introVideo}" type="video/mp4" />
+
+          Sorry, your browser doesn't support embedded videos.
+        </video>
+      `
     }, [])
 
     return (
         <div>
-            <section className="video-container">
-                <video ref={video} className="intro-video" muted>
-                    <source src={introVideo} type="video/mp4" />
-
-                Sorry, your browser doesn't support embedded videos.
-            </video>
+            <section className="video-container" ref={video}>
             </section>
             <DualImageLink images={resolvedImages} texts={imageTexts} />
             <Header title="Our Features" text="We offer a myriad of mentorship services to get you that dream job you've always wanted. Opportunities abound!" />
