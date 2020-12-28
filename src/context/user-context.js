@@ -15,22 +15,20 @@ firebase.initializeApp({
 const AuthUserContext = createContext(undefined)
 
 function AuthUserProvider ({children}) {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState(null)
 
     useEffect(() => {
         firebase
             .auth()
-            .onAuthStateChanged((user) => {
-                if (user) {
-                    setUser(user)
-                    user.getIdTokenResult(true).then(function ({token}) {
-
+            .onAuthStateChanged((authUser) => {
+                if (authUser) {
+                    setUser(authUser)
+                    authUser.getIdTokenResult(true).then(function ({token}) {
                         localStorage.setItem('token', `Bearer ${token}`)
-                        // TODO get Perms
                     })
                 }
             })
-    }, [])
+    }, [user])
     
     return (
         <AuthUserContext.Provider value={[user, setUser]}>

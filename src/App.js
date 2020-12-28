@@ -4,7 +4,7 @@ import Helmet from 'react-helmet'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import {WindowScrollProvider} from './context/scroll-context';
-import PostCreator from './pages/post-creator'
+import PostCreator from './pages/post-creator/index'
 import PostViewer from './pages/post-viewer'
 import UserAdmin from './pages/user-admin'
 import Pricing from './pages/pricing'
