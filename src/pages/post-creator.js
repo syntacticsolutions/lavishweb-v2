@@ -39,6 +39,8 @@ export default function PostCreator ({match, history}) {
     usePermsEffect('post', [user], () => {
         history.push(`/view-post/${id}`)
     })
+
+    console.log({user})
     
     const quillEditor = useRef(null)
     const [editorEl, setEditorEl] = useState(null)
@@ -60,6 +62,8 @@ export default function PostCreator ({match, history}) {
     const [savePost] = useMutation(SAVE_POST_MUTATION)
     const [publishPost] = useMutation(PUBLISH_POST_MUTATION)
     const [uploadImage] = useMutation(UPLOAD_IMAGE_MUTATION)
+
+    console.log({catData, blogImageLinks})
     
     useQuery(GET_POST_QUERY, {
         variables: {id},
@@ -148,8 +152,8 @@ export default function PostCreator ({match, history}) {
         imgInput.onchange = async (e) => {
             const image = await toBase64(e.target.files[0])
             uploadImage({variables: {image}})
+                .then(refetch)
                 .catch(console.log)
-            refetch()
         }
         setImageInput(imgInput)
     }, []) // eslint-disable-line
@@ -196,7 +200,7 @@ export default function PostCreator ({match, history}) {
                             )
                         }
                     </div>
-                    {backgroundImageModalOpen && blogImageLinks.listImages && (
+                    {backgroundImageModalOpen && blogImageLinks?.listImages && (
                         <ImageSelectorModal
                             images={blogImageLinks.listImages.map(({url}) => url)}
                             showTabs={true}

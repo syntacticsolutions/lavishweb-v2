@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 export const usePermsEffect = (perm, [user], cb) => {
     useEffect(() => {
         if (!isEmpty(user)) {
+            console.log({user})
             user.getIdTokenResult(true)
                 .catch(err => {
                     cb()

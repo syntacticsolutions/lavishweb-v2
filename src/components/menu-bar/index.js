@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
 import Toggle from '../common/toggle';
 
 export default function MenuBar({navLinks, lightMode, onSetLightMode}) {
@@ -24,9 +23,9 @@ export default function MenuBar({navLinks, lightMode, onSetLightMode}) {
                 <span onClick={() => window.location.href = '/'}style={{cursor:'pointer'}}>Lavish Web</span>
             </div>
             <ul className={menuOpen ? 'active' : ''}>
-                    {navLinks.map(({ title, path }, ind) => (
-                        <li key={ind}><Link to={path}>{title}</Link></li>
-                    ))}
+                {navLinks.map(({ title, path }, ind) => (
+                    <li key={ind}><a href={path}>{title}</a></li>
+                ))}
             </ul>
             <Toggle onClick={() => onSetLightMode(!lightMode)} />
         </nav>

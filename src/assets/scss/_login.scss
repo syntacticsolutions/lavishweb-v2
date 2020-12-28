@@ -4,6 +4,7 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    height: 80vh;
 
     form {
         display: flex;
@@ -17,11 +18,11 @@
         background: white;
         max-width: 600px;
         width: 90%;
-        position: absolute;
-        bottom: 40%;
         min-height: 400px;
+        max-height: 600px;
         border-radius: 4px;
-        padding: 60px 80px 100px;
+        margin: 150px 0px;
+        padding: 60px 100px;
         text-align:left;
 
         button {

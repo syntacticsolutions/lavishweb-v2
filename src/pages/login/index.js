@@ -132,6 +132,25 @@ export default function Login ({history}) {
         </Form.Item>
     )
 
+    const forgotPwd = (
+        <>
+            <p
+                className="text-primary
+                forgot-pwd"
+                onClick={() => setActiveKey('3')}
+            >
+                Forgot your password?
+            </p>
+            <Button type="flashy" htmlType="submit" onClick={onSubmit}>
+                { activeKey === '1' 
+                    ? 'Login'
+                    : activeKey === '2'
+                    ? 'Sign up'
+                    : 'Request Password Reset'}
+            </Button>
+        </>
+    )
+
     return (
         <section className="signin-container">
             <Form
@@ -146,30 +165,24 @@ export default function Login ({history}) {
                         <TabPane tab="Login" key="1">
                             {email}
                             {password}
+                            {forgotPwd}
                         </TabPane>
                         <TabPane tab="Signup" key="2">
                             {email}
                             {password}
                             {confirmPwd}
                         </TabPane>
+                    </Tabs>
                         {
                             activeKey === '3' && email
                         }
-                    </Tabs>
-                    <p
-                        className="text-primary
-                        forgot-pwd"
-                        onClick={() => setActiveKey('3')}
-                    >
-                        Forgot your password?
-                    </p>
-                    <Button type="flashy" htmlType="submit" onClick={onSubmit}>
-                        { activeKey === '1' 
-                            ? 'Login'
-                            : activeKey === '2'
-                            ? 'Sign up'
-                            : 'Request Password Reset'}
-                    </Button>
+                        {
+                            activeKey === '3' && (
+                                <Button type="flashy" htmlType="submit" onClick={onSubmit}>
+                                    Request Password Reset
+                                </Button>
+                            )
+                        }
                 </div>
             </Form>
         </section>
