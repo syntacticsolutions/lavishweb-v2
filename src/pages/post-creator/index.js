@@ -212,7 +212,7 @@ export default function PostCreator ({match, history}) {
                     )} 
                 </div>
                 <div>
-                    {modelData.title.length + 13}
+                    {modelData?.title?.length + 13}
                     { withLabel(
                         <Input
                             value={modelData.title}
@@ -220,7 +220,7 @@ export default function PostCreator ({match, history}) {
                             onChange={setModel('title')}
                         />, 'Title')
                     }
-                    {modelData.description.length}
+                    {modelData?.description?.length}
                     { withLabel(
                         <Input
                             value={modelData.description}
