@@ -60,7 +60,10 @@ export const GET_BLOG_POSTS_QUERY = gql`
             updated_at
             author
             image
-            categories
+            categories {
+                id
+                label
+            }
         }
     }
 `
@@ -74,7 +77,10 @@ export const GET_BLOG_POSTS_BY_CATEGORY_QUERY = gql`
             updated_at
             author
             image
-            categories
+            categories {
+                id
+                label
+            }
         }
     }
 `
