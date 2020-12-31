@@ -64,6 +64,7 @@ export default function PostCreator ({match, history}) {
     useQuery(GET_POST_QUERY, {
         variables: {id},
         onCompleted: ({post}) => {
+            console.log({post})
             let newModel = {}
 
             for (let id in modelData) {
@@ -72,15 +73,16 @@ export default function PostCreator ({match, history}) {
             if (post.text) {
                 editorEl.setContents(JSON.parse(post.text))
             }
+            console.log({newModel})
             setModelData(newModel)
         }
     })
 
     const save = useCallback(async () => { // eslint-disable-line
         let text = editorEl.getContents()
+        console.log({modelData})
 
-        let savedId = (
-            await savePost(
+        await savePost(
                 {variables:{
                     id,
                     data: {
@@ -89,12 +91,8 @@ export default function PostCreator ({match, history}) {
                     }
                 }}
             )
-        ).data
-            .savePost
 
-        history.replace(`/view-post/${savedId}`)
-
-    }, [editorEl, modelData, history, savePost, id])
+    }, [editorEl, modelData, savePost, id])
 
     const publish = useCallback(async () => { // eslint-disable-line
         let savedId
@@ -123,6 +121,7 @@ export default function PostCreator ({match, history}) {
     }, [modelData, editorEl, id, history, publishPost, savePost])
 
     const setModel = useCallback((key) => (ev) => {
+        console.log(ev)
         setModelData({
             ...modelData,
             [key]: ev.target.value
@@ -251,19 +250,25 @@ export default function PostCreator ({match, history}) {
                         }
                     </div>
                     {
-                        catData?.categories && withLabel(
+                        catData?.categories?.length && withLabel(
                             <Select
-                                value={modelData.categories}
+                                value={modelData.categories.map(({id}) => id)}
                                 mode="multiple"
                                 style={{ width: '100%' }}
                                 placeholder="Select categories"
-                                onChange={(value) => setModel('categories')({target:{value}})}
+                                onChange={(nothing, value) => {
+
+
+                                    setModel('categories')({target:{
+                                        value: value.map(({label, value}) =>({label, id: value}))
+                                    }})
+                                }}
                                 optionLabelProp="label"
                             >
                                 {
-                                    catData.categories.map(({label, id}) => (
+                                    catData.categories.map(({label, id}, index) => (
 
-                                        <Option value={id} label={label} key={id}>
+                                        <Option value={id} label={label} key={index}>
                                             <div className="demo-option-label-item">
                                                 {label}
                                             </div>

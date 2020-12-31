@@ -68,24 +68,6 @@ export default function PostViewer ({match, history}) {
                 <meta property="og:type" content="article" />
                 <meta name="description" content={data?.post?.description} />
             </Helmet>
-            <div className="post-title-container">
-                <h1>{data?.post?.title}</h1>
-                <p className="flex flex-column">
-                    <span>
-                        {
-                            data?.post?.author && 
-                                `Author: ${data?.post?.author}`
-                        }
-                    </span>
-                    <span>Last Updated: 
-                        { 
-                            data?.post?.updated_at &&
-                                new Date(parseInt(data?.post?.updated_at))
-                                    .toLocaleDateString()
-                        }
-                    </span>
-                </p>
-            </div>
             <section className="post-intro-container">
                 {
                     data?.post?.bg_type === '2' ?
@@ -112,6 +94,24 @@ export default function PostViewer ({match, history}) {
                     )
                 }
             </section>
+            <div className="post-title-container">
+                <h1>{data?.post?.title}</h1>
+                <p className="flex flex-column">
+                    <span>
+                        {
+                            data?.post?.author && 
+                                `Author: ${data?.post?.author}`
+                        }
+                    </span>
+                    <span>Last Updated: 
+                        { 
+                            data?.post?.updated_at &&
+                                new Date(parseInt(data?.post?.updated_at))
+                                    .toLocaleDateString()
+                        }
+                    </span>
+                </p>
+            </div>
             <section className="post-content-container">
                 <div ref={quillEditor} />
             </section>

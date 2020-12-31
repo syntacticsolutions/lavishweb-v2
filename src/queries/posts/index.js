@@ -40,7 +40,10 @@ export const GET_POST_QUERY = gql`
                 created_at
             }
             likes
-            categories
+            categories {
+                id
+                label
+            }
             updated_at
             keyword1
             keyword2
