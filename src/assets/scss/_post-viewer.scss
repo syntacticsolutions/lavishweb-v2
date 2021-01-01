@@ -1,5 +1,4 @@
 .post-viewer-container {
-    margin: 60px 0px;
     position: relative;
     background: white;
 
@@ -9,15 +8,28 @@
     }
 
     .ql-container {
-        max-width: 1000px;
-        margin: auto auto;
         border: none;
+
+        .ql-editor {
+            padding: 0;
+        }
+
+        h2, h3, h4, p {
+            max-width: 1000px;
+            margin: auto auto;
+        }
     }
 
     .post-intro-container {
         width: 100vw;
-        height: 100vh;
+        height: 80vh;
         overflow: hidden;
+
+        figure {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+        }
 
         img {
             height: 100%;
@@ -33,10 +45,21 @@
     }
 
     .post-title-container {
+        position: relative;
         display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin: 20px 10%;
+
+        .title-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1050px;
+            margin: 0 auto;
+            background: white;
+            flex-grow: 1;
+            border-top-right-radius: 8px;
+            border-top-left-radius: 8px;
+            padding: 20px;
+        }
 
         h1 {
             font-weight: 900;
@@ -52,10 +75,11 @@
 
     .post-content-container {
         border-radius: 4px;
-        padding: 20px;
-        max-width: 1000px;
+        padding-top: 30px;
         margin: 0 auto;
         z-index: 1;
+        position: relative;
+        background: white;
 
         h2 {
             font-size: 32px;
@@ -67,14 +91,25 @@
     }
     .post-comments-container {
         padding: 40px 20px;
-        max-width: 1100px;
         margin: 0 auto;
         text-align: left;
+        position: relative;
+        background: white;
 
+        h3 {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 15px 0px;
+        }
         h4 {
             max-width: 800px;
             margin: 0 auto;
             padding: 15px 0px;
+        }
+
+        .comments-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .post-comments-inputs {

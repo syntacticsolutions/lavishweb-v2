@@ -95,37 +95,31 @@ export default function PostViewer ({match, history}) {
                 }
             </section>
             <div className="post-title-container">
+                <div className="title-wrapper">
                 <h1>{data?.post?.title}</h1>
-                <p className="flex flex-column">
-                    <span>
-                        {
-                            data?.post?.author && 
-                                `Author: ${data?.post?.author}`
-                        }
-                    </span>
-                    <span>Last Updated: 
-                        { 
-                            data?.post?.updated_at &&
-                                new Date(parseInt(data?.post?.updated_at))
-                                    .toLocaleDateString()
-                        }
-                    </span>
-                </p>
+                        <p className="flex flex-column">
+                        <span>
+                            {
+                                data?.post?.author && 
+                                    `Author: ${data?.post?.author}`
+                            }
+                        </span>
+                        <span>Last Updated: 
+                            { 
+                                data?.post?.updated_at &&
+                                    new Date(parseInt(data?.post?.updated_at))
+                                        .toLocaleDateString()
+                            }
+                        </span>
+                    </p>
+                </div>
             </div>
             <section className="post-content-container">
                 <div ref={quillEditor} />
             </section>
             <section className="post-comments-container">
-                <h3>{data?.post?.comments?.length} Comments</h3>
-                { 
-                    Boolean(data?.post?.comments?.length) &&
-                        data.post.comments.map((comment, key)=> (
-                            <Comment {...{comment, key}} />
-                        ))
-                }
                 <h4>Leave a comment</h4>
                 <div className="post-comments-inputs">
-                    <label>Leave a comment</label>
                     <TextArea
                         value={commentTxt}
                         placeholder="Leave a comment..."
@@ -140,6 +134,15 @@ export default function PostViewer ({match, history}) {
                         }}>
                             Send
                     </Button>
+                </div>
+                <h3>{data?.post?.comments?.length} Comments</h3>
+                <div className="comments-wrapper">
+                    { 
+                        Boolean(data?.post?.comments?.length) &&
+                            data.post.comments.map((comment, key)=> (
+                                <Comment {...{comment, key}} />
+                            ))
+                    }
                 </div>
             </section>
         </article>
