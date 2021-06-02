@@ -141,14 +141,17 @@ export default function Login ({history}) {
             >
                 Forgot your password?
             </p>
-            <Button type="flashy" htmlType="submit" onClick={onSubmit}>
-                { activeKey === '1' 
-                    ? 'Login'
-                    : activeKey === '2'
-                    ? 'Sign up'
-                    : 'Request Password Reset'}
-            </Button>
         </>
+    )
+
+    const submit = (
+        <Button type="flashy" htmlType="submit" onClick={onSubmit}>
+            { activeKey === '1' 
+                ? 'Login'
+                : activeKey === '2'
+                ? 'Sign up'
+                : 'Request Password Reset'}
+        </Button>
     )
 
     return (
@@ -166,11 +169,13 @@ export default function Login ({history}) {
                             {email}
                             {password}
                             {forgotPwd}
+                            {submit}
                         </TabPane>
                         <TabPane tab="Signup" key="2">
                             {email}
                             {password}
                             {confirmPwd}
+                            {submit}
                         </TabPane>
                     </Tabs>
                         {
