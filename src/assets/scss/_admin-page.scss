@@ -2,8 +2,8 @@
     padding: 20px;
     margin-top: 100px;
     text-align: left;
-    max-width: 1400px;
-    margin: 200px auto;
+    width: 1400px;
+    margin: auto auto;
 
     img {
         border-radius: 50%;
@@ -12,5 +12,9 @@
 
     figure {
         margin: 0;
+    }
+
+    .lavish-table {
+        margin-bottom: 40px;
     }
 }

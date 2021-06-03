@@ -1,27 +1,38 @@
 import React from 'react'
 import {useQuery} from '@apollo/react-hooks'
-import { Table } from 'antd';
+import { Table } from '../components/common/table';
 
-import {LIST_USER_QUERY} from '../queries/user'
+import {LIST_USER_QUERY, LIST_ROLES_QUERY} from '../queries'
+
 import {usePermsEffect} from '../utils'
-import {useAuthUser} from '../context/user-context'
 
 export default function UserAdmin ({history}) {
     const {data} = useQuery(LIST_USER_QUERY)
-    const [user] = useAuthUser()
+    const {data: roles} = useQuery(LIST_ROLES_QUERY)
 
-    usePermsEffect('admin', [user], () => {
+    usePermsEffect('manage-users', () => {
         history.push(`/blog`)
     })
 
     return (
         <div className="admin-page">
-            <h1>User Admin</h1>
+            <h1>Users</h1>
             {
                 data?.users && (
                     <Table
-                        columns={config}
-                        dataSource={data?.users}
+                        configs={config}
+                        data={data.users}
+                        maxHeight="500px"
+                    />
+                )
+            }
+            <h1>Roles</h1>
+            {
+                roles?.roles && (
+                    <Table
+                        configs={rolesConfig}
+                        data={roles.roles} 
+                        maxHeight="500px"
                     />
                 )
             }
@@ -32,40 +43,49 @@ export default function UserAdmin ({history}) {
 const config = [
     {
         key: 'image',
-        dataIndex: 'image',
         title: 'Avatar',
-        render: url => (
+        content: ({image}) => (
             <figure>
                 <img
                     src={
-                        url ||
+                        image ||
                             'https://cdn5.vectorstock.com/i/thumb-large/99/94/default-avatar-placeholder-profile-icon-male-vector-23889994.jpg'
                     }
                     height="50px"
                     width="50px"
-                    alt={url}
+                    alt="user-avatar"
                 />
             </figure>
           ),
     },
     {
         key: 'first_name',
-        dataIndex: 'first_name',
         title: 'First Name'
     },
     {
         key: 'last_name',
-        dataIndex: 'last_name',
         title: 'Last Name'
     },
     {
         key: 'email',
         title: 'Email',
-        dataIndex: 'email'
     },
     {
         key: 'role',
-        dataIndex: 'role',
-        title: 'Role'
+        title: 'Role',
+        content: function Content({role}) {
+
+        }
+    }
+]
+
+const rolesConfig = [
+    {
+        title: 'Role',
+        key: 'title',
+    },
+    {
+        title: 'Permissions',
+        key: 'permissions',
     }
 ]

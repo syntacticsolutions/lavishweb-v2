@@ -11,6 +11,13 @@ import Pricing from './pages/pricing'
 import Footer from './components/common/footer'
 import Home from './pages/home'
 
+
+const pages = [
+  {url: '/', title: 'Home'},
+  {url: '/blog', title: 'Blog'},
+  {url: '/login', title: 'Login / Signup'}
+]
+
 const navLinks = [
   {
     title: 'Blog',
@@ -24,10 +31,6 @@ const navLinks = [
     title: 'Cloud',
     path: '/cloud'
   },
-  // {
-  //   title: 'Algorithms',
-  //   path: '/algorithms'
-  // },
   {
     title: 'Brain Hacking',
     path: '/health'
@@ -90,11 +93,5 @@ const getComponent = (link, index) => {
           component={component}
         />
 }
-
-const pages = [
-  {url: '/', title: 'Home'},
-  {url: '/blog', title: 'Blog'},
-  {url: '/login', title: 'Login / Signup'}
-]
 
 export default App;

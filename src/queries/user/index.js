@@ -20,7 +20,6 @@ export const LIST_USER_QUERY = gql`
             last_name
             email
             image
-            role_id
             role
         }
     }

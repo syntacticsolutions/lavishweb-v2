@@ -16,11 +16,13 @@ const AuthUserContext = createContext(undefined)
 
 function AuthUserProvider ({children}) {
     const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         firebase
             .auth()
             .onAuthStateChanged((authUser) => {
+                setLoading(false)
                 if (authUser) {
                     setUser(authUser)
                     authUser.getIdTokenResult(true).then(function ({token}) {
@@ -31,7 +33,7 @@ function AuthUserProvider ({children}) {
     }, [user])
     
     return (
-        <AuthUserContext.Provider value={[user, setUser]}>
+        <AuthUserContext.Provider value={[user, setUser, loading]}>
             {children}
         </AuthUserContext.Provider>
     )

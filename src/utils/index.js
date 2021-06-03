@@ -1,25 +1,24 @@
 import isEmpty from 'lodash/isEmpty'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import {useAuthUser} from '../context/user-context'
 
-export const usePermsEffect = (perm, user, cb) => {
-    const [loggedInUser, setLoggedInUser] = useState(user)
+export const usePermsEffect = (perm, cb) => {
+    const [user,,loading] = useAuthUser()
 
     useEffect(() => {
-        if (user !== loggedInUser) {
-            setLoggedInUser(user)
-        }
-        if (!isEmpty(loggedInUser)) {
-            loggedInUser.getIdTokenResult(true)
+        if (!isEmpty(user) && !loading) {
+            console.log({user})
+            user.getIdTokenResult(true)
                 .catch(err => {
                     cb()
                 })
                 .then((authUser) => {
+                    console.log({authUser})
                     if (!authUser?.claims?.perms?.includes(perm)) {
                         cb()
-    
                         // TODO add toaster messages
                     }
                 })
         }
-    }, [loggedInUser]) // eslint-disable-line
+    }, [user]) // eslint-disable-line
 }
