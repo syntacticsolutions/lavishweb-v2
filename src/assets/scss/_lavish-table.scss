@@ -1,0 +1,30 @@
+.lavish-table {
+    border: 1px solid $border;
+    border-radius: 5px;
+    overflow: scroll;
+
+    table {
+        width: 100%;
+    }
+
+    thead {
+        th {
+            padding: 5px 10px;
+            background-color: $grey-5;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 1px 0px 0px $border;
+        }
+    }
+
+    tbody {
+
+        tr:nth-child(odd) {
+            background-color: $grey-6;
+        }
+
+        td {
+            padding: 5px 10px;
+        }
+    }
+}
