@@ -10,6 +10,8 @@ export default function UserAdmin ({history}) {
     const {data} = useQuery(LIST_USER_QUERY)
     const {data: roles} = useQuery(LIST_ROLES_QUERY)
 
+    console.log({users:data?.users})
+
     usePermsEffect('manage-users', () => {
         history.push(`/blog`)
     })
@@ -73,10 +75,14 @@ const config = [
     {
         key: 'role',
         title: 'Role',
-        content: function Content({role}) {
-
+        content: function Content({ row }) {
+            return row.role
         }
-    }
+    },
+    {
+        key: 'uid',
+        title: 'Firebase ID'
+    },
 ]
 
 const rolesConfig = [

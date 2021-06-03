@@ -19,7 +19,7 @@ export const Table = ({data, configs, additionalData, maxHeight}) => {
                                 <>
                                     {
                                         config.content ?
-                                            <td>{config.content({ data, additionalData })}</td> :
+                                            <td>{config.content({ row, additionalData })}</td> :
                                             <td>{row?.[config.key]}</td>
                                     }
                                 </>

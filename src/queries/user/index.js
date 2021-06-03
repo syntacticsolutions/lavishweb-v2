@@ -15,12 +15,12 @@ export const SIGNUP_MUTATION = gql`
 export const LIST_USER_QUERY = gql`
     query ListUsers {
         users: listUsers {
-            id
+            uid
             first_name
             last_name
-            email
-            image
             role
+            image
+            email
         }
     }
 `

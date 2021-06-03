@@ -1,7 +1,7 @@
 .lavish-table {
     border: 1px solid $border;
     border-radius: 5px;
-    overflow: scroll;
+    overflow: auto;
 
     table {
         width: 100%;
@@ -9,7 +9,7 @@
 
     thead {
         th {
-            padding: 5px 10px;
+            padding: 10px 10px;
             background-color: $grey-5;
             position: sticky;
             top: 0;
@@ -24,7 +24,7 @@
         }
 
         td {
-            padding: 5px 10px;
+            padding: 15px 10px;
         }
     }
 }
